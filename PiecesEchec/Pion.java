@@ -31,7 +31,7 @@ public class Pion extends Piece
  	}
 
  	else if ( ( xDestination == xDepart + sens && yDestination == yDepart + sens ) //Premiere diagonale
- 		|| ( xDestination == xDepart + sens && yDestination == yDepart - sens ) )  //Seconde diagonale
+ 		|| ( xDestination == xDepart - sens && yDestination == yDepart + sens ) )  //Seconde diagonale
  	{
  		return 4; //mouvement qui requiert qu'il y ai une piece ennemi sur la case d'arrivé
  	}
