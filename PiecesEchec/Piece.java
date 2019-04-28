@@ -3,18 +3,15 @@ public abstract class Piece
   public String Couleur ;
 
 
-  public Piece(String couleur)
-  {
+  public Piece(String couleur){
     this.Couleur = couleur;
   }
 
-  public String getCouleur()
-  {
+  public String getCouleur(){
     return this.Couleur;
   }
 
-  public void setCouleur(String couleur)
-  {
+  public void setCouleur(String couleur){
     this.Couleur = couleur;
   }
 
