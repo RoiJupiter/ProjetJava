@@ -217,10 +217,10 @@ public class Partie{
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
      
     if(mvtpossible(xDepart, yDepart, xDestination, yDestination, this.joueur)){
-      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart];
-      this.plateau[xDepart + 8 * yDepart] = null;
-      System.out.println(xDestination + 8 * yDestination <=63);
-      if(xDestination + 8 * yDestination >=56 && xDestination + 8 * yDestination <=63 && PieceDepart.getClass() == Pion.class){
+      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; //On fait bouger la piece
+      this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
+      
+      if(xDestination + 8 * yDestination >=56 && xDestination + 8 * yDestination <=63 && PieceDepart.getClass() == Pion.class){//On verifie si c'est un pion qui peut etre promu
         promotion(xDestination,yDestination,this.joueur);
       }
       //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilité les tests*
@@ -235,7 +235,7 @@ public class Partie{
     Scanner sc = new Scanner(System.in);
     System.out.println("Choisissez en quoi votre pion va etre promu avec un numero. Tour : 1, Cavalier : 2, Fou : 3, Reine : 4.");
     int str = sc.nextInt();
-
+    //On promouvoit le pion en fonction du choix de l'utilisateur 
     if (str == 1) {
       this.plateau[xPiece + 8 * yPiece] = new Tour(joueur);   
     } 
