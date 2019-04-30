@@ -5,10 +5,10 @@ public class Reine extends Piece
     super(Couleur);
   }
 
-  public void mouvement(int xDepart, int yDepart,
+  public int mouvement(int xDepart, int yDepart,
                              int xDestination,  int yDestination)
   {
-    int i = 0 ;
+    return  0 ;
   }
 
   public String toString()

@@ -1,47 +1,43 @@
+import java.util.Scanner;
+
 public class Partie{
+
   private Piece[] plateau;
   private String joueur;
 
 
-  public Partie()
-  {
+  public Partie(){
+
     this.plateau = new Piece[64];
     this.initPlateau(); //initialise le tableau de piece l(8)
     this.joueur = "Blanc";
   }
 
   //Mutateurs et Accesseurs :
-  public Piece[] getPlateau()
-  {
+  public Piece[] getPlateau(){
     return this.plateau;
   }
 
-  public String getJoueur()
-  {
+  public String getJoueur(){
     return this.joueur;
   }
 
-  public void setJoueur(String j)
-  {
+  public void setJoueur(String j){
     this.joueur = j ;
   }
 
-  public void joueursuiv()
-  {
-    if(this.joueur.equals("Blanc"))
-    {
+  public void joueursuiv(){
+    if(this.joueur.equals("Blanc")){
       this.joueur = "Noir";
     }
 
-    else
-    {
+    else{
       this.joueur = "Blanc";
     }
   } 
 
   //Initialisateur de L'echiquier :
-  public void initPlateau()
-  {
+  public void initPlateau(){
     //Les pieces du joueur blanc
     this.plateau[0] = new Tour("Blanc");
     this.plateau[1] = new Cavalier("Blanc");
@@ -52,25 +48,23 @@ public class Partie{
     this.plateau[6] = new Cavalier("Blanc");
     this.plateau[7] = new Tour("Blanc");
 
-    this.plateau[42] = new Cavalier("Blanc"); //POUR UN TESSSSSSSSST ***************************************************************************************************************
+    /*this.plateau[42] = new Cavalier("Blanc"); //POUR UN TESSSSSSSSST ***************************************************************************************************************
     this.plateau[36] = new Pion("Noir"); // LA MMM                **************************************************************************************************************
     this.plateau[35] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
     this.plateau[28] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
     this.plateau[44] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
     this.plateau[37] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-
+    */
 
     //Rangée des pions Blanc
-    for (int i = 8 ; i <= 15  ; i++ )
-      {
+    for (int i = 8 ; i <= 15  ; i++ ){
         this.plateau[i] = new Pion("Blanc");
       }
 
       
     
     //Rangée de pions Noir
-    for (int i = 48 ; i < 56  ; i++ )
-      {
+    for (int i = 48 ; i < 56  ; i++ ){
         this.plateau[i] = new Pion("Noir");
       }
 
@@ -85,27 +79,23 @@ public class Partie{
     this.plateau[63] = new Tour("Noir");
   }
 
-  public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur)
-  {
+  public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
     
 
-    if( xDepart>7 || xDepart<0 && yDepart > 7 || yDepart < 0) 
-      {
+    if( xDepart>7 || xDepart<0 && yDepart > 7 || yDepart < 0) {
         System.out.println("error : La case de depart n'existe pas.");
 
         return false;
       }
 
-    if(xDepart == xDestination && yDepart == yDestination)
-      {
+    if(xDepart == xDestination && yDepart == yDestination){
         System.out.println("error : La case de destination selection est celle de depart.");
 
         return false;
       }  
 
     
-    if( xDestination>7 || xDestination<0 && yDestination > 7 || yDestination < 0) 
-      {
+    if( xDestination>7 || xDestination<0 && yDestination > 7 || yDestination < 0) {
         System.out.println("error : La case de d'arriver n'existe pas.");
 
         return false;
@@ -115,15 +105,13 @@ public class Partie{
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
     
-    if(PieceDepart == null || !(PieceDepart.Couleur.equals(joueur)) )
-    {
+    if(PieceDepart == null || !(PieceDepart.Couleur.equals(joueur)) ){
       System.out.println("error : La case de depart est vide ou pion sur celle-ci ne vous appartient pas. Le contenu de la case : " + PieceDepart);
 
       return false;
     }
 
-    if(PieceArrive != null && PieceArrive.getCouleur() == joueur)
-    {
+    if(PieceArrive != null && PieceArrive.getCouleur() == joueur){
       System.out.println("error : La case de d'arrivee est vide ou elle contient un pion allie. Le contenu de la case : " + PieceArrive);
 
       return false;
@@ -145,6 +133,7 @@ public class Partie{
     11 -> mouvement en ligne gauche + check chemin
     12 -> mouvement en ligne droite + check chemin
     */
+
     System.out.println("piece depart : " + PieceDepart);
     int typemouv = PieceDepart.mouvement(xDepart, yDepart, xDestination, yDestination);
 
@@ -230,6 +219,10 @@ public class Partie{
     if(mvtpossible(xDepart, yDepart, xDestination, yDestination, this.joueur)){
       this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart];
       this.plateau[xDepart + 8 * yDepart] = null;
+      System.out.println(xDestination + 8 * yDestination <=63);
+      if(xDestination + 8 * yDestination >=56 && xDestination + 8 * yDestination <=63 && PieceDepart.getClass() == Pion.class){
+        promotion(xDestination,yDestination,this.joueur);
+      }
       //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilité les tests*
       return true;
     }
@@ -237,11 +230,26 @@ public class Partie{
     return false;
   }
 
+  public void promotion(int xPiece, int yPiece, String joueur){
+    System.out.println("Vous pouvez promouvoir votre Pion !");
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Choisissez en quoi votre pion va etre promu avec un numero. Tour : 1, Cavalier : 2, Fou : 3, Reine : 4.");
+    int str = sc.nextInt();
 
+    if (str == 1) {
+      this.plateau[xPiece + 8 * yPiece] = new Tour(joueur);   
+    } 
+    else if (str == 2) {
+      this.plateau[xPiece + 8 * yPiece] = new Cavalier(joueur);   
+    }
+    else if (str == 3) {
+      this.plateau[xPiece + 8 * yPiece] = new Fou(joueur);   
+    }
+    else if (str == 4) {
+      this.plateau[xPiece + 8 * yPiece] = new Reine(joueur);   
+    }
 
-
-
-
+  }
 
   public void afficherplateau(){
     

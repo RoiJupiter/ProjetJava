@@ -7,8 +7,7 @@ public class Pion extends Piece
   }
 
   public int mouvement( int xDepart, int yDepart,
-                            int xDestination,  int yDestination)
-  {
+                            int xDestination,  int yDestination){
   	int sens = 0 ;
 
   	if(this.Couleur == "Blanc")
@@ -18,8 +17,8 @@ public class Pion extends Piece
  	
 
  	if ( xDepart == xDestination && yDestination - yDepart == sens ) 
- 	
- 		return 2; //mouvement en avant qui requiert qu'il n'y ai pas de pion sur la case de destination
+ 		
+ 			return 2; //mouvement en avant qui requiert qu'il n'y ai pas de pion sur la case de destination
  	
 
  	else if ( xDepart == xDestination && yDestination - yDepart == 2*sens)  
@@ -37,8 +36,7 @@ public class Pion extends Piece
  	
   }//fin de la methode mouvement
 
-  public String toString()
-  {
+  public String toString(){
   	String s = "";
     s += "|Pion" + Couleur + "|";
     return s;
