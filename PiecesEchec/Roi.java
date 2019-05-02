@@ -5,11 +5,13 @@ public class Roi extends Piece
     super(Couleur);
   }
 
-  public void mouvement(int xDepart, int yDepart,
-                             int xDestination,  int yDestination)
-  {
-    int i = 0 ;
+
+  public int mouvement(int xPiece, int yPiece, int xDestination, int yDestination){
+    if ((xPiece - xDestination == 1 || xPiece - xDestination == 0 || xPiece - xDestination == -1) && (yPiece - yDestination == 1 || yPiece - yDestination == 0 || yPiece - yDestination == -1))
+      return 1;
+    return 0;
   }
+
 
   public String toString()
   {

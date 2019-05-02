@@ -48,13 +48,16 @@ public class Partie{
     this.plateau[6] = new Cavalier("Blanc");
     this.plateau[7] = new Tour("Blanc");
 
-    /*this.plateau[42] = new Cavalier("Blanc"); //POUR UN TESSSSSSSSST ***************************************************************************************************************
-    this.plateau[36] = new Pion("Noir"); // LA MMM                **************************************************************************************************************
-    this.plateau[35] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[28] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[44] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[37] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    */
+    this.plateau[34] = new Reine("Blanc"); //POUR UN TESSSSSSSSST ***************************************************************************************************************
+    //this.plateau[41] = new Pion("Noir"); // LA MMM                **************************************************************************************************************
+    this.plateau[48] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
+    this.plateau[43] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
+    this.plateau[52] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
+    this.plateau[27] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
+    this.plateau[20] = new Pion("Noir");
+    this.plateau[13] = new Pion("Noir");
+    this.plateau[25] = new Pion("Noir");
+    this.plateau[16] = new Pion("Noir");
 
     //Rangée des pions Blanc
     for (int i = 8 ; i <= 15  ; i++ ){
@@ -140,31 +143,84 @@ public class Partie{
     System.out.println("type de mouvement : " + typemouv);
     System.out.println("etat de piece arrivee : " + PieceArrive);
     
-    if (typemouv == 0 ){
+    if (typemouv == 0 ){//mouvement impossible
       System.out.println("error : Votre piece ne peut pas faire ce mouvement.");
       return false;
     }
 
-    else if (typemouv == 1  && PieceArrive != null && PieceArrive.Couleur == joueur){ 
+    else if (typemouv == 1  && PieceArrive != null && PieceArrive.Couleur == joueur){ //mouvement qui ne requiert pas de check les pieces sur le chemin
         System.out.println("error : Une piece alliee se trouve la case d'arrivee. Le contenu de la case : " + PieceArrive);
         return false;
     }
     
-    else if (typemouv == 2 && PieceArrive != null){
+    else if (typemouv == 2 && PieceArrive != null){//mouvement en avant qui requiert qu'il n'y ai pas de piece sur la case de destination
       System.out.println("error : La case d arrivee est occupee par la piece " + PieceArrive);
       return false;       
     }
 
-    else if (typemouv == 3 &&  (PieceArrive != null || this.plateau[xDestination + 8 * ( yDestination - 1 )]  !=null ) ){
+    else if (typemouv == 3 &&  (PieceArrive != null || this.plateau[xDestination + 8 * ( yDestination - 1 )]  !=null ) ){//mouvement qui requiert que le pion n'ai pas deja effectué un mouvement et qu'il n'y ai pas de pion sur le chemin
       System.out.println("error : Votre pion a deja effectue un mouvement ou unne piece est sur le chemin ou sur la case d'arrivee.");
       return false;
     }
 
-
-    else if (typemouv == 4 && (PieceArrive == null || PieceArrive.Couleur == this.joueur)){
+    else if (typemouv == 4 && (PieceArrive == null || PieceArrive.Couleur == this.joueur)){//mouvement qui requiert qu'il y ai une piece ennemi sur la case d'arrivee
       System.out.println("error : Il y'a une piece alliee sur la case d'arrivee ou sois elle est vide. Le contenu de la case arrivee : " + PieceArrive);
       return false;
     }
+
+    else if (typemouv == 5){//mouvement en diagonale haut gauche + check chemin
+      int j = yDepart - 1;
+      for (int i = xDepart - 1  ; i != xDestination ; i--) {
+        if (this.plateau[i + j * 8] != null) {
+          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          return false;
+        }
+
+        j = j -1;
+      }
+      return true;
+    }
+
+    else if (typemouv == 6) {//mouvement en diagonale haut droite + check chemin
+      int j = yDepart - 1;
+      for (int i = xDepart + 1  ; i != xDestination ; i++) {
+        if (this.plateau[i + j * 8] != null) {
+          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          return false;
+        }
+        j = j -1;
+      }
+      return true;
+      
+    }
+
+    else if (typemouv == 7) {//mouvement en diagonale bas gauche + check chemin
+      int j = yDepart + 1;
+      for (int i = xDepart - 1  ; i != xDestination ; i--) {
+        if (this.plateau[i + j * 8] != null) {
+          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          return false;
+        }
+        j = j + 1;
+      }
+      return true;
+      
+    }
+
+    else if (typemouv == 8){ //mouvement en diagonale bas droite + check chemin
+      int j = yDepart + 1;
+      for (int i = xDepart + 1  ; i != xDestination ; i++) {
+        if (this.plateau[i + j * 8] != null) {
+          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          return false;
+        }
+
+        j = j + 1;
+      }
+      return true;
+    }
+
+
 
     else if (typemouv == 9){ //mouvement en ligne haut + check chemin
       for (int i = yDepart - 1  ; i > yDestination ; i--){

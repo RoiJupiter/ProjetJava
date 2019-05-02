@@ -20,22 +20,20 @@ public class TestEchec
 	int str = sc.nextInt();*/
 	//System.out.println(plateau[1]);
 	//System.out.println(partie.mvtpossible(1, 1, 1, 2, "Blanc"));
-	System.out.println(partie.deplacementPiece(0,1,0,3));
+	/*System.out.println(partie.deplacementPiece(2,4,1,5));
 	partie.afficherplateau();
-	System.out.println(partie.deplacementPiece(0,3,0,4));
+	System.out.println(partie.deplacementPiece(1,5,2,4));
+	partie.afficherplateau();*/
+	System.out.println(partie.deplacementPiece(2,4,0,2));
+	partie.afficherplateau();	
+	/*System.out.println(partie.deplacementPiece(1,3,2,4));
 	partie.afficherplateau();
-	System.out.println(partie.deplacementPiece(0,4,0,5));
-	partie.afficherplateau();
-	System.out.println(partie.deplacementPiece(0,5,1,6));
+	System.out.println(partie.deplacementPiece(2,4,0,2));
 	partie.afficherplateau(); 
-	System.out.println(partie.deplacementPiece(1,6,0,7));
+	System.out.println(partie.deplacementPiece(4,6,2,4));
 	partie.afficherplateau(); 
-	/*System.out.println(partie.deplacementPiece(0,3,1,5));
-	partie.afficherplateau();  
-	system.out.println(partie.deplacementPiece(1,2,1,4));
-	partie.afficherplateau();  
-	System.out.println(partie.deplacementPiece(1,4,1,5));
-	partie.afficherplateau();*/  
+	System.out.println(partie.deplacementPiece(2,4,4,6));
+	partie.afficherplateau();*/
 	    
 	    
 	/*System.out.println(partie.deplacementPiece(0,5,1,6));
