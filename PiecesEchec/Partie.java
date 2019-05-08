@@ -37,51 +37,39 @@ public class Partie{
   } 
 
   //Initialisateur de L'echiquier :
-  public void initPlateau(){
-    //Les pieces du joueur blanc
-    this.plateau[0] = new Tour("Blanc");
-    this.plateau[1] = new Cavalier("Blanc");
-    this.plateau[2] = new Fou("Blanc");
-    this.plateau[3] = new Roi("Blanc");
-    this.plateau[4] = new Reine("Blanc");
-    this.plateau[5] = new Fou("Blanc");
-    this.plateau[6] = new Cavalier("Blanc");
-    this.plateau[7] = new Tour("Blanc");
+ public void initPlateau(){
 
-    this.plateau[34] = new Reine("Blanc"); //POUR UN TESSSSSSSSST ***************************************************************************************************************
-    //this.plateau[41] = new Pion("Noir"); // LA MMM                **************************************************************************************************************
-    this.plateau[48] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[43] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[52] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[27] = new Pion("Noir"); //LA MMM                **************************************************************************************************************
-    this.plateau[20] = new Pion("Noir");
-    this.plateau[13] = new Pion("Noir");
-    this.plateau[25] = new Pion("Noir");
-    this.plateau[16] = new Pion("Noir");
-
-    //Rangée des pions Blanc
-    for (int i = 8 ; i <= 15  ; i++ ){
-        this.plateau[i] = new Pion("Blanc");
-      }
-
-      
+    //Les pieces du joueur Noir
+    this.plateau[0] = new Tour("Noir");
+    this.plateau[1] = new Cavalier("Noir");
+    this.plateau[2] = new Fou("Noir");
+    this.plateau[3] = new Roi("Noir");
+    this.plateau[4] = new Reine("Noir");
+    this.plateau[5] = new Fou("Noir");
+    this.plateau[6] = new Cavalier("Noir");
+    this.plateau[7] = new Tour("Noir");
+     
     
     //Rangée de pions Noir
-    for (int i = 48 ; i < 56  ; i++ ){
+    for (int i = 8 ; i < 15  ; i++ ){
         this.plateau[i] = new Pion("Noir");
       }
 
-    //Les pieces du joueur Noir
-    this.plateau[56] = new Tour("Noir");
-    this.plateau[57] = new Cavalier("Noir");
-    this.plateau[58] = new Fou("Noir");
-    this.plateau[59] = new Roi("Noir");
-    this.plateau[60] = new Reine("Noir");
-    this.plateau[61] = new Fou("Noir");
-    this.plateau[62] = new Cavalier("Noir");
-    this.plateau[63] = new Tour("Noir");
-  }
+    //Rangée des pions Blanc
+    for (int i = 48 ; i <= 56  ; i++ ){
+        this.plateau[i] = new Pion("Blanc");
+      }
 
+     //Les pieces du joueur Blanc    
+    this.plateau[26] = new Tour("Blanc");
+    this.plateau[57] = new Cavalier("Blanc");
+    this.plateau[58] = new Fou("Blanc");
+    this.plateau[59] = new Roi("Blanc");
+    this.plateau[60] = new Reine("Blanc");
+    this.plateau[61] = new Fou("Blanc");
+    this.plateau[62] = new Cavalier("Blanc");
+    this.plateau[63] = new Tour("Blanc");
+  }
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
     
 
@@ -276,7 +264,8 @@ public class Partie{
       this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; //On fait bouger la piece
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
       
-      if(xDestination + 8 * yDestination >=56 && xDestination + 8 * yDestination <=63 && PieceDepart.getClass() == Pion.class){//On verifie si c'est un pion qui peut etre promu
+      if(xDestination + 8 * yDestination >= 56 && xDestination + 8 * yDestination <= 63 && PieceDepart.getClass() == Pion.class
+        || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){//On verifie si c'est un pion qui peut etre promu
         promotion(xDestination,yDestination,this.joueur);
       }
       //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilité les tests*
