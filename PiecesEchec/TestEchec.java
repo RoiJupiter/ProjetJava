@@ -28,10 +28,12 @@ public class TestEchec
 	/*System.out.println(partie.deplacementPiece(2,4,1,5));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(1,5,2,4));
-	partie.afficherplateau();*/
-	System.out.println(partie.deplacementPiece(2,4,0,2));
 	partie.afficherplateau();
-
+	System.out.println(partie.deplacementPiece(2,4,0,2));
+	partie.afficherplateau();*/
+	System.out.println(partie.deplacementPiece(0,6,0,5));
+	partie.afficherplateau();
+	System.out.println(partie.getHistorique());
 	/*System.out.println(partie.deplacementPiece(1,3,2,4));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(2,4,0,2));
