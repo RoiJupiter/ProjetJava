@@ -1,8 +1,8 @@
 public class Reine extends Piece
 {
-  public Reine(String Couleur)
+  public Reine(String Couleur,int Mouv)
   {
-    super(Couleur);
+    super(Couleur,Mouv);
   }
 
   public int mouvement(int xDepart, int yDepart,

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="LocalProfile" version="4">
+  <OBJECT>
+    <ID name="LocalProfile" mc="Infrastructure.Profile" uid="0d22609d-189b-4347-8581-240c59af1dc6"/>
+    <PID name="LocalModule" mc="Infrastructure.ModuleComponent" uid="2cfcf163-24cf-4c8a-aad0-015af76b0915"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[LocalProfile]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>

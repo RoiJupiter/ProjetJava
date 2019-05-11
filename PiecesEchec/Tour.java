@@ -1,8 +1,8 @@
 public class Tour extends Piece
 {
 
-	public Tour(String couleur){
-		super(couleur);
+	public Tour(String couleur,int mouv){
+		super(couleur,mouv);
 	}
 
 	public int mouvement( int xDepart, int yDepart, int xDestination, int yDestination){

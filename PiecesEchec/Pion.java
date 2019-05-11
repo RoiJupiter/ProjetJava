@@ -1,9 +1,9 @@
 public class Pion extends Piece
 {
 
-  public Pion(String Couleur)
+  public Pion(String Couleur , int Mouv)
   {
-    super(Couleur);
+    super(Couleur,Mouv);
   }
 
   public int mouvement( int xDepart, int yDepart,

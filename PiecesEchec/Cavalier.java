@@ -1,8 +1,8 @@
 public class Cavalier extends Piece
 {
-  public Cavalier(String Couleur)
+  public Cavalier(String Couleur, int Mouv)
   {
-    super(Couleur);
+    super(Couleur,Mouv);
   }
 
   public int mouvement( int xDepart, int yDepart,

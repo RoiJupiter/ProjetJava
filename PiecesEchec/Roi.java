@@ -1,8 +1,8 @@
 public class Roi extends Piece
 {
-  public Roi(String Couleur)
+  public Roi(String Couleur, int Mouv)
   {
-    super(Couleur);
+    super(Couleur, Mouv);
   }
 
 

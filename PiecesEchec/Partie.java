@@ -46,35 +46,35 @@ public class Partie{
  public void initPlateau(){
 
     //Les pieces du joueur Noir
-    this.plateau[0] = new Tour("Noir");
-    this.plateau[1] = new Cavalier("Noir");
-    this.plateau[2] = new Fou("Noir");
-    this.plateau[3] = new Roi("Noir");
-    this.plateau[4] = new Reine("Noir");
-    this.plateau[5] = new Fou("Noir");
-    this.plateau[6] = new Cavalier("Noir");
-    this.plateau[7] = new Tour("Noir");
+    this.plateau[0] = new Tour("Noir",0);
+    this.plateau[1] = new Cavalier("Noir",0);
+    this.plateau[2] = new Fou("Noir",0);
+    this.plateau[3] = new Roi("Noir",0);
+    this.plateau[4] = new Reine("Noir",0);
+    this.plateau[5] = new Fou("Noir",0);
+    this.plateau[6] = new Cavalier("Noir",0);
+    this.plateau[7] = new Tour("Noir",0);
 
 
-    //Rangée de pions Noir
+    //Rangee de pions Noir
     for (int i = 8 ; i < 15  ; i++ ){
-        this.plateau[i] = new Pion("Noir");
+        this.plateau[i] = new Pion("Noir",0);
       }
 
-    //Rangée des pions Blanc
+    //Rangee des pions Blanc
     for (int i = 48 ; i <= 56  ; i++ ){
-        this.plateau[i] = new Pion("Blanc");
+        this.plateau[i] = new Pion("Blanc",0);
       }
 
      //Les pieces du joueur Blanc
-    this.plateau[56] = new Tour("Blanc");
-    this.plateau[57] = new Cavalier("Blanc");
-    this.plateau[58] = new Fou("Blanc");
-    this.plateau[59] = new Roi("Blanc");
-    this.plateau[60] = new Reine("Blanc");
-    this.plateau[61] = new Fou("Blanc");
-    this.plateau[62] = new Cavalier("Blanc");
-    this.plateau[63] = new Tour("Blanc");
+    this.plateau[56] = new Tour("Blanc",0);
+    this.plateau[57] = new Cavalier("Blanc",0);
+    this.plateau[58] = new Fou("Blanc",0);
+    this.plateau[59] = new Roi("Blanc",0);
+    this.plateau[60] = new Reine("Blanc",0);
+    this.plateau[61] = new Fou("Blanc",0);
+    this.plateau[62] = new Cavalier("Blanc",0);
+    this.plateau[63] = new Tour("Blanc",0);
   }
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
 
@@ -98,7 +98,7 @@ public class Partie{
         return false;
       }
 
-    //methodes teste sur les pieces Depart/Arrivé
+    //methodes teste sur les pieces Depart/Arrive
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
@@ -119,7 +119,7 @@ public class Partie{
     0 -> mouvement impossible
     1 -> mouvement qui ne requiert pas de check les pieces sur le chemin
     2 -> mouvement en avant qui requiert qu'il n'y ai pas de piece sur la case de destination
-    3 -> mouvement qui requiert que le pion n'FouNoirai pas deja effectué un mouvement et qu'il n'y ai pas de pion sur le chemin
+    3 -> mouvement qui requiert que le pion n'FouNoirai pas deja effectue un mouvement et qu'il n'y ai pas de pion sur le chemin
     4 -> mouvement qui requiert qu'il y ai une piece ennemi sur la case d'arrivee
     5 -> mouvement en diagonale haut gauche + check chemin
     6 -> mouvement en diagonale haut droite + check chemin
@@ -152,7 +152,7 @@ public class Partie{
       return false;
     }
 
-    else if (typemouv == 3 &&  (PieceArrive != null || this.plateau[xDestination + 8 * ( yDestination - 1 )]  !=null ) ){//mouvement qui requiert que le pion n'ai pas deja effectué un mouvement et qu'il n'y ai pas de pion sur le chemin
+    else if (typemouv == 3 &&  (PieceArrive != null || this.plateau[xDestination + 8 * ( yDestination - 1 )]  !=null ) ){//mouvement qui requiert que le pion n'ai pas deja effectue un mouvement et qu'il n'y ai pas de pion sur le chemin
       System.out.println("error : Votre pion a deja effectue un mouvement ou unne piece est sur le chemin ou sur la case d'arrivee.");
       return false;
     }
@@ -267,16 +267,20 @@ public class Partie{
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
     if(mvtpossible(xDepart, yDepart, xDestination, yDestination, this.joueur)){
-      historique = historique + "Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangée : " + PieceArrive + " \n";
+      //MAJ de l'historique :
+      historique = historique + "Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
+      
+      //Mouvement de la piece:
       this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; //On fait bouger la piece
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
 
+      //On verifie si la piece est un pion qui peut etre promu
       if(xDestination + 8 * yDestination >= 56 && xDestination + 8 * yDestination <= 63 && PieceDepart.getClass() == Pion.class
-        || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){//On verifie si la piece est un pion qui peut etre promu
+        || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){
         promotion(xDestination,yDestination,this.joueur);
       }
 
-      //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilité les tests*
+      //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilite les tests*
       return true;
     }
 
@@ -288,24 +292,24 @@ public class Partie{
     Scanner sc = new Scanner(System.in);
     System.out.println("Choisissez en quoi votre pion va etre promu avec un numero. Tour : 1, Cavalier : 2, Fou : 3, Reine : 4.");
     int str = sc.nextInt();
-    //On promouvoit le pion en fonction du choix de l'utilisateur
+    //On promouvoit le pion en fonction du choix du joueur courant
     if (str == 1) {
-      this.plateau[xPiece + 8 * yPiece] = new Tour(joueur);
+      this.plateau[xPiece + 8 * yPiece] = new Tour(joueur,1);
     }
     else if (str == 2) {
-      this.plateau[xPiece + 8 * yPiece] = new Cavalier(joueur);
+      this.plateau[xPiece + 8 * yPiece] = new Cavalier(joueur,1);
     }
     else if (str == 3) {
-      this.plateau[xPiece + 8 * yPiece] = new Fou(joueur);
+      this.plateau[xPiece + 8 * yPiece] = new Fou(joueur,1);
     }
     else if (str == 4) {
-      this.plateau[xPiece + 8 * yPiece] = new Reine(joueur);
+      this.plateau[xPiece + 8 * yPiece] = new Reine(joueur,1);
     }
 
   }
 
   public void afficherplateau(){
-
+    //affichage d'un plateau 
     for (int i = 0 ; i < 8 ; i++ ){ // les lignes du plateau
 
         String s = ""; //creer la ligne du plateau
@@ -326,4 +330,4 @@ public class Partie{
 
   }//fin de la methode afficherplateau()
 
-}//fin de la class
+}//fin de la class Partie

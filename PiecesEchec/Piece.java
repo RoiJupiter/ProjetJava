@@ -1,18 +1,27 @@
 public abstract class Piece
 {
   public String Couleur ;
+  public int Mouv;
 
 
-  public Piece(String couleur){
+  public Piece(String couleur, int mouv){
     this.Couleur = couleur;
+    this.Mouv = mouv;
   }
 
   public String getCouleur(){
     return this.Couleur;
   }
 
+  public int getMouv(){
+    return this.Mouv;
+  }
+
   public void setCouleur(String couleur){
     this.Couleur = couleur;
+  }
+  public void setMouv(int mouv){
+    this.Mouv = mouv; 
   }
 
  public abstract int mouvement( int xDepart, int yDepart,

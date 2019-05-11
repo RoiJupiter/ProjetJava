@@ -1,8 +1,8 @@
 public class Fou extends Piece
 {
-  public Fou(String Couleur)
+  public Fou(String Couleur, int Mouv)
   {
-    super(Couleur);
+    super(Couleur,Mouv);
   }
 
   public int mouvement(int xDepart, int yDepart,

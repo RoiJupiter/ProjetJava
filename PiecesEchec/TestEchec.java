@@ -9,7 +9,7 @@ public class TestEchec
 
 
 
-	Piece pion = new Pion("Blanc");
+	Piece pion = new Pion("Blanc",0);
 	System.out.println(pion.getCouleur());
 
 	Partie partie = new Partie() ;

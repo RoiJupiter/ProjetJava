@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="projetjava" version="4">
+  <OBJECT>
+    <ID name="projetjava" mc="Standard.Package" uid="4fccc702-383f-46f5-be47-04982c3b8711"/>
+    <PID name="ProjetJava" mc="Standard.Project" uid="8385bd2e-afe8-4bfe-964a-98464c9ea5e1"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[projetjava]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Pion" mc="Standard.Class" uid="06f49641-cbbc-4748-9696-beabbf28e270"/>
+        <COMPID name="Tour" mc="Standard.Class" uid="42c2a55f-2775-4f2e-a193-c5a4c4640a7d"/>
+        <COMPID name="Cavalier" mc="Standard.Class" uid="e9326d04-f9fd-4cc3-ab29-360a4a9d8f9e"/>
+        <COMPID name="Reine" mc="Standard.Class" uid="46b9d1ba-fdf0-4c4a-9254-1846f04c7bb5"/>
+        <COMPID name="Roi" mc="Standard.Class" uid="e87656d3-503d-45aa-a90a-6bfdf46fd070"/>
+        <COMPID name="Fou" mc="Standard.Class" uid="e7d310f4-c7fc-4288-b3e8-ea73c3a8a7e0"/>
+        <COMPID name="Partie" mc="Standard.Class" uid="060506f6-f644-4692-ac14-ba168968c264"/>
+        <COMPID name="Piece" mc="Standard.Class" uid="47829f06-90af-48d5-9009-49d749fb30b2"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="projetjava Class diagram" mc="Standard.ClassDiagram" uid="88e15e07-4159-4a3f-b391-1fcdee3ed46f"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
