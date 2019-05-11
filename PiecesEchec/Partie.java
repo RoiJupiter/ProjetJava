@@ -270,8 +270,10 @@ public class Partie{
       //MAJ de l'historique :
       historique = historique + "Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
       
+      //On on indique que cette piece n'est pas vierge de mouvement  
+      PieceDepart.Mouv = 1;
       //Mouvement de la piece:
-      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; //On fait bouger la piece
+      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; 
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
 
       //On verifie si la piece est un pion qui peut etre promu
