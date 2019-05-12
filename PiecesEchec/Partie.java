@@ -10,7 +10,7 @@ public class Partie{
   public Partie(){
 
     this.plateau = new Piece[64];
-    this.initPlateau(); //initialise le tableau de piece l(8)
+    this.initPlateau(); //initialisation de l echiquier l(8)
     this.joueur = "Blanc";
     this.historique = "Historique de la partie : \n";
   }
@@ -57,9 +57,15 @@ public class Partie{
 
 
     //Rangee de pions Noir
-    for (int i = 8 ; i < 15  ; i++ ){
+    for (int i = 8 ; i <= 15  ; i++ ){
         this.plateau[i] = new Pion("Noir",0);
       }
+
+
+    this.plateau[10] = new Pion("Noir",0);
+    this.plateau[27] = new Roi("Blanc",0);
+    this.plateau[24] = new Tour("Blanc",0);
+    this.plateau[31] = new Tour("Blanc",0);
 
     //Rangee des pions Blanc
     for (int i = 48 ; i <= 56  ; i++ ){
@@ -70,7 +76,7 @@ public class Partie{
     this.plateau[56] = new Tour("Blanc",0);
     this.plateau[57] = new Cavalier("Blanc",0);
     this.plateau[58] = new Fou("Blanc",0);
-    this.plateau[59] = new Roi("Blanc",0);
+    //this.plateau[59] = new Roi("Blanc",0);
     this.plateau[60] = new Reine("Blanc",0);
     this.plateau[61] = new Fou("Blanc",0);
     this.plateau[62] = new Cavalier("Blanc",0);
@@ -131,34 +137,35 @@ public class Partie{
     12 -> mouvement en ligne droite + check chemin
     */
 
-    System.out.println("piece depart : " + PieceDepart);
+    /*System.out.println("piece depart : " + PieceDepart);
+    System.out.println("etat de piece arrivee : " + PieceArrive + "au coordonnee (" + xDestination + "," + yDestination + ").");*/
     int typemouv = PieceDepart.mouvement(xDepart, yDepart, xDestination, yDestination);
 
-    System.out.println("type de mouvement : " + typemouv);
-    System.out.println("etat de piece arrivee : " + PieceArrive);
+    //System.out.println("type de mouvement : " + typemouv);
+    
 
     if (typemouv == 0 ){//mouvement impossible
-      System.out.println("error : Votre piece ne peut pas faire ce mouvement.");
+      //System.out.println("error : Votre piece ne peut pas faire ce mouvement.");
       return false;
     }
 
     else if (typemouv == 1  && PieceArrive != null && PieceArrive.Couleur == joueur){ //mouvement qui ne requiert pas de check les pieces sur le chemin
-        System.out.println("error : Une piece alliee se trouve la case d'arrivee. Le contenu de la case : " + PieceArrive);
+        //System.out.println("error : Une piece alliee se trouve la case d'arrivee. Le contenu de la case : " + PieceArrive);
         return false;
     }
 
     else if (typemouv == 2 && PieceArrive != null){//mouvement en avant qui requiert qu'il n'y ai pas de piece sur la case de destination
-      System.out.println("error : La case d arrivee est occupee par la piece " + PieceArrive);
+      //System.out.println("error : La case d arrivee est occupee par la piece " + PieceArrive);
       return false;
     }
 
     else if (typemouv == 3 &&  (PieceArrive != null || this.plateau[xDestination + 8 * ( yDestination - 1 )]  !=null ) ){//mouvement qui requiert que le pion n'ai pas deja effectue un mouvement et qu'il n'y ai pas de pion sur le chemin
-      System.out.println("error : Votre pion a deja effectue un mouvement ou unne piece est sur le chemin ou sur la case d'arrivee.");
+      //System.out.println("error : Votre pion a deja effectue un mouvement ou unne piece est sur le chemin ou sur la case d'arrivee.");
       return false;
     }
 
     else if (typemouv == 4 && (PieceArrive == null || PieceArrive.Couleur == this.joueur)){//mouvement qui requiert qu'il y ai une piece ennemi sur la case d'arrivee
-      System.out.println("error : Il y'a une piece alliee sur la case d'arrivee ou sois elle est vide. Le contenu de la case arrivee : " + PieceArrive);
+      //System.out.println("error : Il y'a une piece alliee sur la case d'arrivee ou sois elle est vide. Le contenu de la case arrivee : " + PieceArrive);
       return false;
     }
 
@@ -166,7 +173,7 @@ public class Partie{
       int j = yDepart - 1;
       for (int i = xDepart - 1  ; i != xDestination ; i--) {
         if (this.plateau[i + j * 8] != null) {
-          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
           return false;
         }
 
@@ -179,7 +186,7 @@ public class Partie{
       int j = yDepart - 1;
       for (int i = xDepart + 1  ; i != xDestination ; i++) {
         if (this.plateau[i + j * 8] != null) {
-          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
           return false;
         }
         j = j - 1;
@@ -192,7 +199,7 @@ public class Partie{
       int j = yDepart + 1;
       for (int i = xDepart - 1  ; i != xDestination ; i--) {
         if (this.plateau[i + j * 8] != null) {
-          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
           return false;
         }
         j = j + 1;
@@ -205,7 +212,7 @@ public class Partie{
       int j = yDepart + 1;
       for (int i = xDepart + 1  ; i != xDestination ; i++) {
         if (this.plateau[i + j * 8] != null) {
-          System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
           return false;
         }
 
@@ -220,7 +227,7 @@ public class Partie{
       for (int i = yDepart - 1  ; i > yDestination ; i--){
 
         if (this.plateau[xDepart + i * 8] != null){
-          System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
+          //System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
           return false;
         }
       }
@@ -230,7 +237,7 @@ public class Partie{
       for (int i = yDepart + 1 ; i < yDestination  ; i++){
 
         if (this.plateau[xDepart + i * 8] != null){
-          System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
+          //System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
           return false;
         }
       }
@@ -240,7 +247,7 @@ public class Partie{
     else if (typemouv == 11){//mouvement en ligne gauche + check chemin
       for (int i = xDepart - 1 ; i > xDestination   ; i--){
         if (this.plateau[i + yDestination * 8] != null){
-          System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
+          //System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
           return false;
         }
       }
@@ -249,7 +256,7 @@ public class Partie{
     else if (typemouv == 12){//mouvement en ligne droite + check chemin
       for (int i = xDepart + 1 ; i < xDestination   ; i++){
         if (this.plateau[i + yDestination * 8] != null){
-          System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
+          //System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
           return false;
         }
       }
@@ -267,26 +274,37 @@ public class Partie{
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
     if(mvtpossible(xDepart, yDepart, xDestination, yDestination, this.joueur)){
-      //MAJ de l'historique :
-      historique = historique + "Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
-      
-      //On on indique que cette piece n'est pas vierge de mouvement  
-      PieceDepart.Mouv = 1;
+
       //Mouvement de la piece:
       this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; 
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
 
-      //On verifie si la piece est un pion qui peut etre promu
-      if(xDestination + 8 * yDestination >= 56 && xDestination + 8 * yDestination <= 63 && PieceDepart.getClass() == Pion.class
-        || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){
-        promotion(xDestination,yDestination,this.joueur);
-      }
+      if (this.miseEnEchec()){
+        //MAJ de l'historique :
+        historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
+        
+        //On on indique que cette piece n'est pas vierge de mouvement a partir de ce moment 
+        PieceDepart.setMouv(1);
 
-      //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilite les tests*
-      return true;
+
+        //On verifie si la piece est un pion qui peut etre promu
+        if(xDestination + 8 * yDestination >= 56 && xDestination + 8 * yDestination <= 63 && PieceDepart.getClass() == Pion.class
+          || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){
+          promotion(xDestination,yDestination,this.joueur);
+        }
+
+        //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilite les tests*
+        return true;//le mouvement a ete effectue
+      }
+      else{
+        this.plateau[xDepart + 8 * yDepart] = PieceDepart;
+        this.plateau[xDestination + 8 * yDestination] = PieceArrive;
+        
+        return false;
+      }
     }
 
-    return false;
+  return false;//le mouvement ne s est pas effectue 
   }
 
   public void promotion(int xPiece, int yPiece, String joueur){
@@ -294,7 +312,7 @@ public class Partie{
     Scanner sc = new Scanner(System.in);
     System.out.println("Choisissez en quoi votre pion va etre promu avec un numero. Tour : 1, Cavalier : 2, Fou : 3, Reine : 4.");
     int str = sc.nextInt();
-    //On promouvoit le pion en fonction du choix du joueur courant
+    //On promouvoit le pion en fonction du choix du joueur courant. La piece creer n est pas vierge de mouvement.
     if (str == 1) {
       this.plateau[xPiece + 8 * yPiece] = new Tour(joueur,1);
     }
@@ -309,6 +327,49 @@ public class Partie{
     }
 
   }
+
+  public boolean miseEnEchec(){
+    String couleuradv;
+    if(this.joueur == "Blanc"){
+      couleuradv = "Noir";
+
+    }
+    else
+      couleuradv = "Blanc";
+
+    int xRoi = 0;
+    int yRoi = 0;
+    //On cherche les coordonnee du roi du joueur courant
+    for (int i = 0; i < 8 ; i++) {
+
+      for (int j = 0 ; j < 8; j++) {
+        if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].getClass() == Roi.class && this.plateau[i * 8 + j].getCouleur() != couleuradv){
+          xRoi = j;
+          yRoi = i;
+        }
+      }
+    }//Fin de la recherche des coordonnee du roi
+
+    this.joueur = couleuradv;
+
+    for (int i = 0; i < 8 ; i++) {
+
+      for (int j = 0; j < 8; j++) {
+        if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].Couleur == joueur && this.mvtpossible(j,i,xRoi,yRoi,joueur)){
+          System.out.println("Votre Roi est en echec !");
+          this.joueur = couleuradv;
+          return false;
+        }
+      }
+      
+    }
+    //System.out.println("Votre Roi n est pas en echec !");
+    this.joueur = couleuradv;
+    return true;
+  }//fin de miseEnEchec
+
+
+  
 
   public void afficherplateau(){
     //affichage d'un plateau 
