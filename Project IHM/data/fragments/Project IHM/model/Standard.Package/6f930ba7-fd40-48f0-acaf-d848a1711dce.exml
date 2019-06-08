@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="project ihm" version="4">
+  <OBJECT>
+    <ID name="project ihm" mc="Standard.Package" uid="6f930ba7-fd40-48f0-acaf-d848a1711dce"/>
+    <PID name="Project IHM" mc="Standard.Project" uid="15ce0071-864e-4bff-abd6-26037ea241e7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[project ihm]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Dessin" mc="Standard.Class" uid="183296bf-f3f8-4b79-b126-0cc26003716b"/>
+        <COMPID name="Figure" mc="Standard.Class" uid="0ef5cebf-1bbd-4211-b60d-8765c28624bd"/>
+        <COMPID name="Segment" mc="Standard.Class" uid="853ca3fa-e14a-4957-8782-ea9e6e483f1a"/>
+        <COMPID name="Cercle" mc="Standard.Class" uid="022f7653-852a-471c-bfc6-3b41d6dec401"/>
+        <COMPID name="Elypse" mc="Standard.Class" uid="0521fe98-0016-4b87-849d-5cfb8646d311"/>
+        <COMPID name="Triangle" mc="Standard.Class" uid="beb628ee-1d6a-4ce5-a7be-983560fff871"/>
+        <COMPID name="Rectangle" mc="Standard.Class" uid="09820150-80a5-49f0-9abc-bccc2db3a1fd"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="project ihm Class diagram" mc="Standard.ClassDiagram" uid="19783f86-f9da-41e5-afb0-4c9d86cd2e2c"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

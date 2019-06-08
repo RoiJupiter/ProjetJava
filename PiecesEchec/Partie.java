@@ -32,13 +32,13 @@ public class Partie{
     this.joueur = j ;
   }
 
-  public void joueursuiv(){
+  public String joueursuiv(){
     if(this.joueur.equals("Blanc")){
-      this.joueur = "Noir";
+      return "Noir";
     }
 
     else{
-      this.joueur = "Blanc";
+      return "Blanc";
     }
   }
 
@@ -50,8 +50,8 @@ public class Partie{
     this.plateau[1] = new Cavalier("Noir",0);
     this.plateau[2] = new Fou("Noir",0);
     this.plateau[3] = new Roi("Noir",0);
-    this.plateau[4] = new Reine("Noir",0);
-    this.plateau[5] = new Fou("Noir",0);
+    //this.plateau[4] = new Reine("Noir",0);
+    //this.plateau[5] = new Fou("Noir",0);
     this.plateau[6] = new Cavalier("Noir",0);
     this.plateau[7] = new Tour("Noir",0);
 
@@ -62,24 +62,23 @@ public class Partie{
       }
 
 
-    this.plateau[10] = new Pion("Noir",0);
-    this.plateau[27] = new Roi("Blanc",0);
-    this.plateau[24] = new Tour("Blanc",0);
-    this.plateau[31] = new Tour("Blanc",0);
 
     //Rangee des pions Blanc
     for (int i = 48 ; i <= 56  ; i++ ){
         this.plateau[i] = new Pion("Blanc",0);
       }
 
+    //this.plateau[5 + 8] = null;
+    this.plateau[5 + 8 * 6] = null;
+
      //Les pieces du joueur Blanc
     this.plateau[56] = new Tour("Blanc",0);
     this.plateau[57] = new Cavalier("Blanc",0);
     this.plateau[58] = new Fou("Blanc",0);
-    //this.plateau[59] = new Roi("Blanc",0);
-    this.plateau[60] = new Reine("Blanc",0);
-    this.plateau[61] = new Fou("Blanc",0);
-    this.plateau[62] = new Cavalier("Blanc",0);
+    this.plateau[59] = new Reine("Blanc",0);
+    this.plateau[60] = new Roi("Blanc",0);
+    //this.plateau[61] = new Fou("Blanc",0);
+    //this.plateau[62] = new Cavalier("Blanc",0);
     this.plateau[63] = new Tour("Blanc",0);
   }
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
@@ -142,7 +141,7 @@ public class Partie{
     int typemouv = PieceDepart.mouvement(xDepart, yDepart, xDestination, yDestination);
 
     //System.out.println("type de mouvement : " + typemouv);
-    
+
 
     if (typemouv == 0 ){//mouvement impossible
       //System.out.println("error : Votre piece ne peut pas faire ce mouvement.");
@@ -260,7 +259,12 @@ public class Partie{
           return false;
         }
       }
+    }
 
+    else if (typemouv == 13){
+      if(!(verifroque(xDepart, yDepart, xDestination, yDestination, joueur))){
+        return false;
+      }
     }
 
     return true;
@@ -276,35 +280,42 @@ public class Partie{
     if(mvtpossible(xDepart, yDepart, xDestination, yDestination, this.joueur)){
 
       //Mouvement de la piece:
-      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart]; 
+      this.plateau[xDestination + 8 * yDestination] = this.plateau[xDepart + 8 * yDepart];//la piece se deplace/mange
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
 
-      if (this.miseEnEchec()){
+      if (this.miseEnEchec()){//on verifie si apres ce mouvement le roi du joueur courant est en echec
         //MAJ de l'historique :
         historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
-        
-        //On on indique que cette piece n'est pas vierge de mouvement a partir de ce moment 
+
+        //On on indique que cette piece n est plus vierge de mouvement a partir de ce moment
         PieceDepart.setMouv(1);
 
 
-        //On verifie si la piece est un pion qui peut etre promu
+        //On verifie si la piece deplace est un Pion qui peut etre promu
         if(xDestination + 8 * yDestination >= 56 && xDestination + 8 * yDestination <= 63 && PieceDepart.getClass() == Pion.class
           || xDestination + 8 * yDestination >= 0 && xDestination + 8 * yDestination <= 7 && PieceDepart.getClass() == Pion.class){
           promotion(xDestination,yDestination,this.joueur);
         }
 
-        //this.joueursuiv(); //changement de joueur *mis en commentaire pour facilite les tests*
+        //System.out.println("Le joueur courant est : " + this.joueur);
+        this.joueur = this.joueursuiv(); //au tour du joueur suivant  *mis en commentaire pour facilite les tests*.
+        //System.out.println("Le joueur courant est : " + this.joueur);
+
         return true;//le mouvement a ete effectue
-      }
-      else{
+
+      }//fin de la verification de la mise en echec du joueur courant
+
+      else{// apres le mouvement le roi du joueur courant est en echec
+            //on annule le mouvement
         this.plateau[xDepart + 8 * yDepart] = PieceDepart;
         this.plateau[xDestination + 8 * yDestination] = PieceArrive;
-        
-        return false;
+
+        return false;//le mouvement ne s est pas effectue
+
       }
     }
 
-  return false;//le mouvement ne s est pas effectue 
+  return false;//le mouvement ne s est pas effectue
   }
 
   public void promotion(int xPiece, int yPiece, String joueur){
@@ -328,8 +339,77 @@ public class Partie{
 
   }
 
-  public boolean miseEnEchec(){
-    String couleuradv;
+  public boolean verifroque(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
+
+    Piece[] copie = new Piece[64];
+
+    //creation d un plateautemporaire
+    Piece[] temp = new Piece[64];
+    for (int i = 0; i < 63; i++) {
+      copie[i] = this.plateau[i];
+    }
+
+    //copie du plateau original
+    Piece[] plateaubase = new Piece[64];
+    for (int i = 0; i < 63; i++) {
+      plateaubase[i] = this.plateau[i];
+    }
+
+      int xDestination2 = xDestination - 1;
+      if(xDestination > xDepart){
+        Piece TourArrive = this.plateau[7 + 8 * yDepart];
+
+        //on verifie si y'a pas de piece entre le roi et la TourArrive
+        int x = 1;
+        while (this.plateau[xDepart + x + 8 * yDepart] != TourArrive) {
+                  if (this.plateau[xDepart + x + 8 * yDepart] != null &&
+                  this.plateau[xDepart + x + 8 * yDepart] != TourArrive) {
+                  System.out.println("une piece est entre votre Roi et votre Tour.contenu de la case : "
+                  + this.plateau[xDepart + x + 8 * yDepart]);
+                    return false;
+                  }
+                  else
+                    x++;//on test pour la case suivante
+
+        }
+        if (TourArrive != null && TourArrive.Mouv == 0) {
+
+          //on deplace le roi et on verifie si a chaque mouvement miseEnEchec
+                //grace a miseEnEchec dans deplacementPiece
+          for (int i = 0; i < 2 ; i++) {
+
+            this.joueur = joueur;
+            //on enregistre le plateau a chaque mouvements
+            temp = this.plateau;
+            this.plateau = copie;
+
+            if (!(deplacementPiece(xDepart + i, yDepart,
+            xDestination2 + i, yDestination))){
+              this.plateau = plateaubase; //on remet le plateau de base si le roque
+              return false;                   //est impossible
+            }
+            this.plateau = temp;//le roque a fonctionnee donc on garde le nouv plateau
+          }
+
+          //on deplace a la TourArrive
+          this.plateau[xDepart + 1  + 8 * yDepart] = this.plateau[7 + 8 * yDepart];
+          this.plateau[7 + 8 * yDepart] = null;
+
+          //on remet joueur modifier par deplacementPiece
+          this.joueur = joueur;
+          //fin du roque
+          return true;
+
+
+        }
+      }
+
+    return false;
+  }//fin de verifroque
+
+
+  public boolean miseEnEchec(){//envoie true si le Roi du joueur n est
+    String couleuradv;          //pas en echec sinon envoie false
     if(this.joueur == "Blanc"){
       couleuradv = "Noir";
 
@@ -337,9 +417,9 @@ public class Partie{
     else
       couleuradv = "Blanc";
 
+    //on cherche les coordonnee du roi du joueur courant
     int xRoi = 0;
     int yRoi = 0;
-    //On cherche les coordonnee du roi du joueur courant
     for (int i = 0; i < 8 ; i++) {
 
       for (int j = 0 ; j < 8; j++) {
@@ -348,10 +428,13 @@ public class Partie{
           yRoi = i;
         }
       }
-    }//Fin de la recherche des coordonnee du roi
+    }//fin de la recherche des coordonnee du roi
 
+     //on se met a la place du joueur adv pour
+    //voir si il peut tenter de manger le roi du joueur courant
+    //du coup on test pour chaque piece adv si un mouvement est
+    // possible vers le roi du joueur courant
     this.joueur = couleuradv;
-
     for (int i = 0; i < 8 ; i++) {
 
       for (int j = 0; j < 8; j++) {
@@ -361,19 +444,28 @@ public class Partie{
           return false;
         }
       }
-      
+
     }
-    //System.out.println("Votre Roi n est pas en echec !");
+
+    if(this.joueur == "Blanc"){
+      couleuradv = "Noir";
+
+    }
+    else
+      couleuradv = "Blanc";
+
     this.joueur = couleuradv;
+
     return true;
   }//fin de miseEnEchec
 
 
-  
+
 
   public void afficherplateau(){
-    //affichage d'un plateau 
-    for (int i = 0 ; i < 8 ; i++ ){ // les lignes du plateau
+    
+    //affichage d'un plateau
+    for (int i = 0 ; i < 8 ; i++ ){// les lignes du plateau
 
         String s = ""; //creer la ligne du plateau
 

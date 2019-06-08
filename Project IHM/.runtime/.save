@@ -1,0 +1,6 @@
+#Mon Jun 03 19:42:51 CEST 2019
+org.modelio.module.propertytab.JavaDesigner\ v3.8.01\ GModule\ @file\:///C\:/Users/varra/.modelio/3.8/modules/JavaDesigner_3.8.01/JavaDesigner_3.8.01.jmdac\ runtime\ module_.org.modelio.full.perspective.parentId=app.ui.ext_com.partstack.bottom
+org.modelio.diagram.editor.OpenedDiagrams0='project ihm Class diagram' {19783f86-f9da-41e5-afb0-4c9d86cd2e2c} Standard.ClassDiagram
+org.modelio.module.propertytab.JavaDesigner\ v3.8.01\ GModule\ @file\:///C\:/Users/varra/.modelio/3.8/modules/JavaDesigner_3.8.01/JavaDesigner_3.8.01.jmdac\ runtime\ module_.org.modelio.diagram.perspective.parentId=app.ui.ext_com.partstack.right
+org.modelio.module.propertytab.JavaDesigner\ v3.8.01\ GModule\ @file\:///C\:/Users/varra/.modelio/3.8/modules/JavaDesigner_3.8.01/JavaDesigner_3.8.01.jmdac\ runtime\ module_.org.modelio.development.perspective.parentId=app.ui.ext_com.partstack.bottom
+org.modelio.module.propertytab.JavaDesigner\ v3.8.01\ GModule\ @file\:///C\:/Users/varra/.modelio/3.8/modules/JavaDesigner_3.8.01/JavaDesigner_3.8.01.jmdac\ runtime\ module_.org.modelio.app.ui.model.perspective.parentId=org.modelio.app.bottom.parts

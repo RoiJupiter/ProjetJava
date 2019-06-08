@@ -8,51 +8,64 @@ public class TestEchec
 	{
 
 
-
-	Piece pion = new Pion("Blanc",0);
-	System.out.println(pion.getCouleur());
-
-	Partie partie = new Partie() ;
-
-	MenuJoueur.dmrg();
-
-
+	Partie partie = new Partie();
 	Piece[] plateau = partie.getPlateau();
-
 	partie.afficherplateau();
-	/*Scanner sc = new Scanner(System.in);
+	//System.out.print(plateau[7 + 8 * 7]);
+
+
+
+
+	//MenuJoueur.dmrg();
+
+	System.out.println(partie.deplacementPiece(4,7,6,7));
+	partie.afficherplateau();
+	System.out.println(partie.deplacementPiece(3,0,5,0));
+	partie.afficherplateau();
+
+
+
+
+	/*System.out.println(partie.deplacementPiece(3,4,4,4));
+
+	partie.afficherplateau();*/
+
+	/*
+	Scanner sc = new Scanner(System.in);
 	System.out.println("Veuillez saisir un nombre :");
-	int str = sc.nextInt();*/
+	int str = sc.nextInt();
 	//System.out.println(plateau[1]);
 	//System.out.println(partie.mvtpossible(1, 1, 1, 2, "Blanc"));
-	/*System.out.println(partie.deplacementPiece(2,4,1,5));
+	System.out.println(partie.deplacementPiece(2,4,1,5));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(1,5,2,4));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(2,4,0,2));
-	partie.afficherplateau();*/
+	partie.afficherplateau();
 	partie.setJoueur("Noir");
 	System.out.println(partie.deplacementPiece(2,1,2,2));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(3,3,3,4));
 	partie.afficherplateau();
 	System.out.println(partie.getHistorique());
-	/*System.out.println(partie.deplacementPiece(1,3,2,4));
+	System.out.println(partie.deplacementPiece(1,3,2,4));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(2,4,0,2));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(4,6,2,4));
 	partie.afficherplateau();
 	System.out.println(partie.deplacementPiece(2,4,4,6));
-	partie.afficherplateau();*/
+	partie.afficherplateau();
 
 
-	/*System.out.println(partie.deplacementPiece(0,5,1,6));
+	System.out.println(partie.deplacementPiece(0,5,1,6));
 	partie.afficherplateau();  // Test pour bouger et manger une piece adverse
 
 	//System.out.println(partie.getJoueur()); //Tour du joueur apres le dernier mouvement
 	System.out.println(partie.deplacementPiece(2,2,2,4));
-	partie.afficherplateau();*/
+	partie.afficherplateau();
+*/
+
 
 
 
