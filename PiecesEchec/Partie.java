@@ -47,12 +47,12 @@ public class Partie{
 
     //Les pieces du joueur Noir
     this.plateau[0] = new Tour("Noir",0);
-    this.plateau[1] = new Cavalier("Noir",0);
-    this.plateau[2] = new Fou("Noir",0);
+    //this.plateau[1] = new Cavalier("Noir",0);
+    //this.plateau[2] = new Fou("Noir",0);
     this.plateau[3] = new Roi("Noir",0);
     //this.plateau[4] = new Reine("Noir",0);
     //this.plateau[5] = new Fou("Noir",0);
-    this.plateau[6] = new Cavalier("Noir",0);
+    //this.plateau[6] = new Cavalier("Noir",0);
     this.plateau[7] = new Tour("Noir",0);
 
 
@@ -68,14 +68,15 @@ public class Partie{
         this.plateau[i] = new Pion("Blanc",0);
       }
 
-    //this.plateau[5 + 8] = null;
-    this.plateau[5 + 8 * 6] = null;
+    this.plateau[2 + 8 * 6] = null;
+    this.plateau[2 + 8 * 1] = null;
+
 
      //Les pieces du joueur Blanc
     this.plateau[56] = new Tour("Blanc",0);
-    this.plateau[57] = new Cavalier("Blanc",0);
-    this.plateau[58] = new Fou("Blanc",0);
-    this.plateau[59] = new Reine("Blanc",0);
+    //this.plateau[57] = new Cavalier("Blanc",0);
+    //this.plateau[58] = new Fou("Blanc",0);
+    //this.plateau[59] = new Reine("Blanc",0);
     this.plateau[60] = new Roi("Blanc",0);
     //this.plateau[61] = new Fou("Blanc",0);
     //this.plateau[62] = new Cavalier("Blanc",0);
@@ -106,6 +107,7 @@ public class Partie{
     //methodes teste sur les pieces Depart/Arrive
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
+    System.out.println(xDestination + 8 * yDestination);
 
     if(PieceDepart == null || !(PieceDepart.Couleur.equals(joueur)) ){
       System.out.println("error : La case de depart est vide ou pion sur celle-ci ne vous appartient pas. Le contenu de la case : " + PieceDepart);
@@ -113,9 +115,12 @@ public class Partie{
       return false;
     }
 
-    if(PieceArrive != null && PieceArrive.getCouleur() == joueur){
-      System.out.println("error : La case de d'arrivee est vide ou elle contient un pion allie. Le contenu de la case : " + PieceArrive);
 
+
+    if(PieceArrive != null && PieceArrive.getCouleur() == joueur){
+
+      System.out.println("error : La case de d'arrivee est vide ou elle contient un pion allie. Le contenu de la case : " + PieceArrive);
+      System.out.println("je t'en merde");
       return false;
     }
 
@@ -135,6 +140,7 @@ public class Partie{
     11 -> mouvement en ligne gauche + check chemin
     12 -> mouvement en ligne droite + check chemin
     */
+
 
     /*System.out.println("piece depart : " + PieceDepart);
     System.out.println("etat de piece arrivee : " + PieceArrive + "au coordonnee (" + xDestination + "," + yDestination + ").");*/
@@ -356,6 +362,8 @@ public class Partie{
     }
 
       int xDestination2 = xDestination - 1;
+
+      //si c est un roque vers la droite
       if(xDestination > xDepart){
         Piece TourArrive = this.plateau[7 + 8 * yDepart];
 
@@ -397,14 +405,61 @@ public class Partie{
 
           //on remet joueur modifier par deplacementPiece
           this.joueur = joueur;
-          //fin du roque
-          return true;
 
+
+          return true;
+        }
+      }//fin du roque vers la droite
+
+      //si c est un roque vers la gauche
+      if(xDestination < xDepart){
+        Piece TourArrive = this.plateau[0 + 8 * yDepart];
+
+        //on verifie si y'a pas de piece entre le roi et la TourArrive
+        int x = 1;
+        while (this.plateau[xDepart - x + 8 * yDepart] != TourArrive) {
+                  if (this.plateau[xDepart - x + 8 * yDepart] != null &&
+                  this.plateau[xDepart - x + 8 * yDepart] != TourArrive) {
+                  System.out.println("une piece est entre votre Roi et votre Tour.contenu de la case : "
+                  + this.plateau[xDepart - x + 8 * yDepart]);
+                    return false;
+                  }
+                  else
+                    x++;//on test pour la case suivante
 
         }
-      }
+        if (TourArrive != null && TourArrive.Mouv == 0) {
 
-    return false;
+          //on deplace le roi et on verifie si a chaque mouvement miseEnEchec
+                //grace a miseEnEchec dans deplacementPiece
+          Piece casetemp = this.plateau[xDestination2 + 8 * yDestination];
+
+          while(casetemp != TourArrive){
+            if (!(deplacementPiece(xDepart, yDepart,
+              xDestination2, yDestination))){
+                this.plateau = plateaubase; //on remet le plateau de base si le roque
+                System.out.println("Votre roque vous met en echec ");                              //est impossible
+                return false;
+            }
+            xDepart = xDepart - 1 ;
+            xDestination2 = xDestination2 - 1;
+
+            }
+          }
+
+
+          //on deplace a la TourArrive
+          this.plateau[xDepart - 1  + 8 * yDepart] = this.plateau[0 + 8 * yDepart];
+          this.plateau[0 + 8 * yDepart] = null;
+
+          //on remet joueur modifier par deplacementPiece
+          this.joueur = joueur;
+
+
+          return true;
+        }
+
+      return false ;
   }//fin de verifroque
 
 
@@ -463,7 +518,7 @@ public class Partie{
 
 
   public void afficherplateau(){
-    
+
     //affichage d'un plateau
     for (int i = 0 ; i < 8 ; i++ ){// les lignes du plateau
 

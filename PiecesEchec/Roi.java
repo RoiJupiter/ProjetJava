@@ -11,7 +11,8 @@ public class Roi extends Piece
   public int mouvement(int xPiece, int yPiece, int xDestination, int yDestination){
 
     if(this.Mouv == 0 && yPiece == yDestination && Math.abs(xDestination - xPiece) == 2 ){
-      return 13;
+      System.out.println("ROQUE");
+      return 13;//demande de roque
     }
 
 
@@ -20,7 +21,7 @@ public class Roi extends Piece
 
 
 
-    
+    System.out.println(xDestination);
     return 0;//mouvement de la piece invalide
 
   }//fin de mouvment

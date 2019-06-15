@@ -17,11 +17,13 @@ public class TestEchec
 
 
 	//MenuJoueur.dmrg();
+	partie.setJoueur("Noir");
+	System.out.println(partie.deplacementPiece(3,0,1,0));
+	partie.afficherplateau();
 
-	System.out.println(partie.deplacementPiece(4,7,6,7));
+	System.out.println(partie.deplacementPiece(4,7,2,7));
 	partie.afficherplateau();
-	System.out.println(partie.deplacementPiece(3,0,5,0));
-	partie.afficherplateau();
+
 
 
 
