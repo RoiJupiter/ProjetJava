@@ -9,8 +9,8 @@ public class Cavalier extends Piece
                              int xDestination, int yDestination)
   {
     if((xDestination == xDepart - 2 && (yDestination == yDepart - 1 || yDestination == yDepart + 1) )
-    ||  xDestination == xDepart - 1 && (yDestination == yDepart - 2 || yDestination == yDepart + 2) 
-    ||  xDestination == xDepart + 1 && (yDestination == yDepart - 2 || yDestination == yDepart + 2) 
+    ||  xDestination == xDepart - 1 && (yDestination == yDepart - 2 || yDestination == yDepart + 2)
+    ||  xDestination == xDepart + 1 && (yDestination == yDepart - 2 || yDestination == yDepart + 2)
     ||  xDestination == xDepart + 2 && (yDestination == yDepart - 1 || yDestination == yDepart + 1)){
       return 1;
     }
@@ -18,11 +18,17 @@ public class Cavalier extends Piece
       return 0;
   }
 
-  public String toString()
-  {
-  	String s = "";
-    s += "|Cavalier" + Couleur + "|";
+  public String toString(){
+    String s = "";
+
+    if (Couleur == "Blanc") {
+      s = "|   ♞   |";
+    }
+
+    else
+      s = "|   ♘   |";
+
     return s;
   }
-  
+
 }

@@ -37,8 +37,15 @@ public class Pion extends Piece
   }//fin de la methode mouvement
 
   public String toString(){
-  	String s = "";
-    s += "|Pion" + Couleur + "|";
+		String s = "";
+
+    if (Couleur == "Blanc") {
+			s = "|   ♟   |";
+    }
+
+		else
+			s = "|   ♙   |";
+
     return s;
   }
 

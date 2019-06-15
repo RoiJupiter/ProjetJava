@@ -1,5 +1,4 @@
-public class Tour extends Piece
-{
+public class Tour extends Piece{
 
 	public Tour(String couleur,int mouv){
 		super(couleur,mouv);
@@ -8,18 +7,18 @@ public class Tour extends Piece
 	public int mouvement( int xDepart, int yDepart, int xDestination, int yDestination){
 
 		if (xDepart == xDestination){
-			if (yDestination - yDepart < -1 )//mouvement vertical vers le haut sur plusieurs cases 	
-				return 9; 		
-  		
+			if (yDestination - yDepart < -1 )//mouvement vertical vers le haut sur plusieurs cases
+				return 9;
+
 			else if (yDestination - yDepart > 1) //mouvement vertical vers le bas sur plusieurs cases
   				return 10;
-  			 		
+
 			return 1;
 
 		}
 
 		else if (yDepart == yDestination){
-			if ( xDestination - xDepart < -1){//mouvement horizontale vers la gauche sur plusieurs cases 	
+			if ( xDestination - xDepart < -1){//mouvement horizontale vers la gauche sur plusieurs cases
 				return 11;
 			}
 
@@ -34,10 +33,16 @@ public class Tour extends Piece
 
  	}//fin de la methode mouvement
 
-  public String toString()
-  {
-    String s = "";
-    s += "|Tour" + Couleur + "|";
+  public String toString(){
+		String s = "";
+
+    if (Couleur == "Blanc") {
+			s = "|   ♜   |";
+    }
+
+		else
+			s = "|   ♖   |";
+
     return s;
   }
 

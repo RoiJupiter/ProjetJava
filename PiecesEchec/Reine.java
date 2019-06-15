@@ -10,7 +10,7 @@ public class Reine extends Piece
   {
     if (xDestination - xDepart == yDestination - yDepart) {
       if (xDestination < xDepart - 1 ) {
-        return 5; //mouvement en diagonale haut gauche + check chemin       
+        return 5; //mouvement en diagonale haut gauche + check chemin
       }
 
       else if (xDestination > xDepart + 1) {
@@ -18,7 +18,7 @@ public class Reine extends Piece
       }
 
       else return 1;
-      
+
     }
 
     else if (xDestination - xDepart == -(yDestination - yDepart)) {
@@ -30,23 +30,23 @@ public class Reine extends Piece
         return  6; //mouvement en diagonale haut droite + check chemin
       }
 
-      else 
+      else
         return 1;
     }
 
     else if (xDepart == xDestination){
-      if (yDestination - yDepart < -1 )//mouvement vertical vers le haut sur plusieurs cases  
-        return 9;     
-      
+      if (yDestination - yDepart < -1 )//mouvement vertical vers le haut sur plusieurs cases
+        return 9;
+
       else if (yDestination - yDepart > 1) //mouvement vertical vers le bas sur plusieurs cases
           return 10;
-            
+
       return 1;
 
     }
 
     else if (yDepart == yDestination){
-      if ( xDestination - xDepart < -1){//mouvement horizontale vers la gauche sur plusieurs cases  
+      if ( xDestination - xDepart < -1){//mouvement horizontale vers la gauche sur plusieurs cases
         return 11;
       }
 
@@ -61,10 +61,16 @@ public class Reine extends Piece
       return 0;
   }
 
-  public String toString()
-  {
-  	String s = "";
-    s += "|Reine" + Couleur + "|";
+  public String toString(){
+    String s = "";
+
+    if (Couleur == "Blanc") {
+      s = "|   ♛   |";
+    }
+
+    else
+      s = "|   ♕   |";
+
     return s;
   }
 

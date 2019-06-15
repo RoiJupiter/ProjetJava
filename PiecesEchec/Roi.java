@@ -1,9 +1,7 @@
 import static java.lang.Math.abs;
 
-public class Roi extends Piece
-{
-  public Roi(String Couleur, int Mouv)
-  {
+public class Roi extends Piece{
+  public Roi(String Couleur, int Mouv){
     super(Couleur, Mouv);
   }
 
@@ -21,18 +19,24 @@ public class Roi extends Piece
 
 
 
-    System.out.println(xDestination);
+
     return 0;//mouvement de la piece invalide
 
   }//fin de mouvment
 
 
-  public String toString()
-  {
-  	String s = "";
-    s += "|Roi" + Couleur + "|";
+  public String toString(){
+		String s = "";
+
+    if (Couleur == "Blanc") {
+			s = "|   ♚   |";
+    }
+
+		else
+			s = "|   ♔   |";
+
     return s;
-  }//fin de toString
+  }
 
 
 }//fin de la class

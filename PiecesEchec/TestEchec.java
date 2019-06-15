@@ -1,8 +1,7 @@
 import java.util.Scanner;
 import java.util.*;
 
-public class TestEchec
-{
+public class TestEchec{
 
 	public static void main(String[] args)
 	{
@@ -13,16 +12,21 @@ public class TestEchec
 	partie.afficherplateau();
 	//System.out.print(plateau[7 + 8 * 7]);
 
-
+	partie.chess();
 
 
 	//MenuJoueur.dmrg();
-	partie.setJoueur("Noir");
-	System.out.println(partie.deplacementPiece(3,0,1,0));
+	/*System.out.println(partie.getJoueur());
+
+	System.out.println(partie.deplacementPiece(4,3,3,3));
 	partie.afficherplateau();
 
-	System.out.println(partie.deplacementPiece(4,7,2,7));
+	System.out.println(partie.deplacementPiece(4,0,2,1));
 	partie.afficherplateau();
+
+	System.out.println(partie.deplacementPiece(3,3,3,2));
+	partie.afficherplateau();
+*/
 
 
 

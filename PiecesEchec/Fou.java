@@ -9,7 +9,7 @@ public class Fou extends Piece
                              int xDestination,  int yDestination){
     if (xDestination - xDepart == yDestination - yDepart) {
       if (xDestination < xDepart - 1 ) {
-        return 5; //mouvement en diagonale haut gauche + check chemin       
+        return 5; //mouvement en diagonale haut gauche + check chemin
       }
 
       else if (xDestination > xDepart + 1) {
@@ -17,7 +17,7 @@ public class Fou extends Piece
       }
 
       else return 1;
-      
+
     }
 
     else if (xDestination - xDepart == -(yDestination - yDepart)) {
@@ -29,18 +29,24 @@ public class Fou extends Piece
         return  6; //mouvement en diagonale haut droite + check chemin
       }
 
-      else 
+      else
         return 1;
     }
-    else 
+    else
       return 0;
-   }//fin de la methode mouvement 
+   }//fin de la methode mouvement
 
-  public String toString()
-  {
-  	String s = "";
-    s += "|Fou" + Couleur + "|";
-    return s;
-  }
+   public String toString(){
+ 		String s = "";
+
+     if (Couleur == "Blanc") {
+ 			s = "|   ♗   |";
+     }
+
+ 		else
+ 			s = "|   \u265D   |";
+
+     return s;
+   }
 
 }//fin de la class

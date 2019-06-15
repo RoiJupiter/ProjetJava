@@ -47,12 +47,12 @@ public class Partie{
 
     //Les pieces du joueur Noir
     this.plateau[0] = new Tour("Noir",0);
-    //this.plateau[1] = new Cavalier("Noir",0);
-    //this.plateau[2] = new Fou("Noir",0);
+    this.plateau[1] = new Cavalier("Noir",0);
+    this.plateau[2] = new Fou("Noir",0);
     this.plateau[3] = new Roi("Noir",0);
-    //this.plateau[4] = new Reine("Noir",0);
-    //this.plateau[5] = new Fou("Noir",0);
-    //this.plateau[6] = new Cavalier("Noir",0);
+    this.plateau[4] = new Reine("Noir",0);
+    this.plateau[5] = new Fou("Noir",0);
+    this.plateau[6] = new Cavalier("Noir",0);
     this.plateau[7] = new Tour("Noir",0);
 
 
@@ -61,28 +61,32 @@ public class Partie{
         this.plateau[i] = new Pion("Noir",0);
       }
 
-
+    //this.plateau[4] = new Cavalier("Noir",0);
+    //this.plateau[16] = new Tour("Noir",0);
+    //this.plateau[28] = new Roi("Blanc",0);
+    //this.plateau[39] = new Tour("Noir",0);
 
     //Rangee des pions Blanc
     for (int i = 48 ; i <= 56  ; i++ ){
         this.plateau[i] = new Pion("Blanc",0);
       }
 
-    this.plateau[2 + 8 * 6] = null;
-    this.plateau[2 + 8 * 1] = null;
+    //this.plateau[2 + 8 * 6] = null;
+    //this.plateau[2 + 8 * 1] = null;
 
 
      //Les pieces du joueur Blanc
     this.plateau[56] = new Tour("Blanc",0);
-    //this.plateau[57] = new Cavalier("Blanc",0);
-    //this.plateau[58] = new Fou("Blanc",0);
-    //this.plateau[59] = new Reine("Blanc",0);
+    this.plateau[57] = new Cavalier("Blanc",0);
+    this.plateau[58] = new Fou("Blanc",0);
+    this.plateau[59] = new Reine("Blanc",0);
     this.plateau[60] = new Roi("Blanc",0);
-    //this.plateau[61] = new Fou("Blanc",0);
-    //this.plateau[62] = new Cavalier("Blanc",0);
+    this.plateau[61] = new Fou("Blanc",0);
+    this.plateau[62] = new Cavalier("Blanc",0);
     this.plateau[63] = new Tour("Blanc",0);
   }
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
+
 
 
     if( xDepart>7 || xDepart<0 && yDepart > 7 || yDepart < 0) {
@@ -92,7 +96,7 @@ public class Partie{
       }
 
     if(xDepart == xDestination && yDepart == yDestination){
-        System.out.println("error : La case de destination selection est celle de depart.");
+        //System.out.println("error : La case de destination selection est celle de depart.");
 
         return false;
       }
@@ -104,13 +108,16 @@ public class Partie{
         return false;
       }
 
+    //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
     //methodes teste sur les pieces Depart/Arrive
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
-    System.out.println(xDestination + 8 * yDestination);
+    //System.out.println(xDepart + 8 * yDepart);
+    //System.out.println(PieceDepart);
 
     if(PieceDepart == null || !(PieceDepart.Couleur.equals(joueur)) ){
-      System.out.println("error : La case de depart est vide ou pion sur celle-ci ne vous appartient pas. Le contenu de la case : " + PieceDepart);
+      //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
+      System.out.println("error: La case de depart est vide ou pion sur celle-ci ne vous appartient pas. Le contenu de la case : " + PieceDepart);
 
       return false;
     }
@@ -119,8 +126,8 @@ public class Partie{
 
     if(PieceArrive != null && PieceArrive.getCouleur() == joueur){
 
-      System.out.println("error : La case de d'arrivee est vide ou elle contient un pion allie. Le contenu de la case : " + PieceArrive);
-      System.out.println("je t'en merde");
+      //System.out.println("error : La case de d'arrivee est vide ou elle contient un pion allie. Le contenu de la case : " + PieceArrive);
+
       return false;
     }
 
@@ -146,7 +153,7 @@ public class Partie{
     System.out.println("etat de piece arrivee : " + PieceArrive + "au coordonnee (" + xDestination + "," + yDestination + ").");*/
     int typemouv = PieceDepart.mouvement(xDepart, yDepart, xDestination, yDestination);
 
-    //System.out.println("type de mouvement : " + typemouv);
+
 
 
     if (typemouv == 0 ){//mouvement impossible
@@ -158,6 +165,7 @@ public class Partie{
         //System.out.println("error : Une piece alliee se trouve la case d'arrivee. Le contenu de la case : " + PieceArrive);
         return false;
     }
+
 
     else if (typemouv == 2 && PieceArrive != null){//mouvement en avant qui requiert qu'il n'y ai pas de piece sur la case de destination
       //System.out.println("error : La case d arrivee est occupee par la piece " + PieceArrive);
@@ -278,8 +286,10 @@ public class Partie{
   }
 
   public boolean deplacementPiece(int xDepart, int yDepart,
-                                   int xDestination, int yDestination)
-  {
+                                   int xDestination, int yDestination){
+
+
+    //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
@@ -290,8 +300,8 @@ public class Partie{
       this.plateau[xDepart + 8 * yDepart] = null;//On rend nulle la case de depart
 
       if (this.miseEnEchec()){//on verifie si apres ce mouvement le roi du joueur courant est en echec
-        //MAJ de l'historique :
-        historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
+
+
 
         //On on indique que cette piece n est plus vierge de mouvement a partir de ce moment
         PieceDepart.setMouv(1);
@@ -303,11 +313,18 @@ public class Partie{
           promotion(xDestination,yDestination,this.joueur);
         }
 
+
         //System.out.println("Le joueur courant est : " + this.joueur);
         this.joueur = this.joueursuiv(); //au tour du joueur suivant  *mis en commentaire pour facilite les tests*.
         //System.out.println("Le joueur courant est : " + this.joueur);
 
+
+
+        //MAJ de l'historique :s
+        historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
+
         return true;//le mouvement a ete effectue
+
 
       }//fin de la verification de la mise en echec du joueur courant
 
@@ -315,6 +332,7 @@ public class Partie{
             //on annule le mouvement
         this.plateau[xDepart + 8 * yDepart] = PieceDepart;
         this.plateau[xDestination + 8 * yDestination] = PieceArrive;
+
 
         return false;//le mouvement ne s est pas effectue
 
@@ -347,13 +365,14 @@ public class Partie{
 
   public boolean verifroque(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
 
+    //copie du plateau
     Piece[] copie = new Piece[64];
-
-    //creation d un plateautemporaire
-    Piece[] temp = new Piece[64];
     for (int i = 0; i < 63; i++) {
       copie[i] = this.plateau[i];
     }
+
+    //creation d un plateautemporaire
+    Piece[] temp = new Piece[64];
 
     //copie du plateau original
     Piece[] plateaubase = new Piece[64];
@@ -394,9 +413,9 @@ public class Partie{
             if (!(deplacementPiece(xDepart + i, yDepart,
             xDestination2 + i, yDestination))){
               this.plateau = plateaubase; //on remet le plateau de base si le roque
-              return false;                   //est impossible
+              return false;                   //echoue
             }
-            this.plateau = temp;//le roque a fonctionnee donc on garde le nouv plateau
+            this.plateau = temp;//le roque a fonctionne donc on garde le nouv plateau
           }
 
           //on deplace a la TourArrive
@@ -438,7 +457,7 @@ public class Partie{
             if (!(deplacementPiece(xDepart, yDepart,
               xDestination2, yDestination))){
                 this.plateau = plateaubase; //on remet le plateau de base si le roque
-                System.out.println("Votre roque vous met en echec ");                              //est impossible
+                System.out.println("Votre roque vous met en echec ");//est impossible
                 return false;
             }
             xDepart = xDepart - 1 ;
@@ -465,6 +484,8 @@ public class Partie{
 
   public boolean miseEnEchec(){//envoie true si le Roi du joueur n est
     String couleuradv;          //pas en echec sinon envoie false
+    String courant = this.getJoueur();
+
     if(this.joueur == "Blanc"){
       couleuradv = "Noir";
 
@@ -475,8 +496,9 @@ public class Partie{
     //on cherche les coordonnee du roi du joueur courant
     int xRoi = 0;
     int yRoi = 0;
-    for (int i = 0; i < 8 ; i++) {
 
+    //on recherche les coordonnee du roi
+    for (int i = 0; i < 8 ; i++) {
       for (int j = 0 ; j < 8; j++) {
         if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].getClass() == Roi.class && this.plateau[i * 8 + j].getCouleur() != couleuradv){
           xRoi = j;
@@ -488,14 +510,13 @@ public class Partie{
      //on se met a la place du joueur adv pour
     //voir si il peut tenter de manger le roi du joueur courant
     //du coup on test pour chaque piece adv si un mouvement est
-    // possible vers le roi du joueur courant
+    //possible vers le roi du joueur courant
     this.joueur = couleuradv;
     for (int i = 0; i < 8 ; i++) {
-
       for (int j = 0; j < 8; j++) {
         if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].Couleur == joueur && this.mvtpossible(j,i,xRoi,yRoi,joueur)){
           System.out.println("Votre Roi est en echec !");
-          this.joueur = couleuradv;
+          this.joueur = courant;
           return false;
         }
       }
@@ -514,15 +535,145 @@ public class Partie{
     return true;
   }//fin de miseEnEchec
 
+  public boolean Mat(){//envoie true si le joueur courant est en Mat
+    if (this.miseEnEchec()) {
 
+
+    int xRoi = 0;
+    int yRoi = 0;
+    joueur = this.joueur;
+    //on recherche les coordonnee du roi
+    for (int i = 0; i < 8 ; i++) {
+      for (int j = 0 ; j < 8; j++) {
+        if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].getClass() == Roi.class && this.plateau[i * 8 + j].getCouleur() == this.getJoueur()){
+          xRoi = j;
+          yRoi = i;
+        }
+      }
+    }//fin de la recherche des coordonnee du roi du joueur courant
+
+    Piece[] plateaubase = new Piece[64];
+    for (int i = 0; i < 63; i++) {
+      plateaubase[i] = this.plateau[i];
+    }
+
+    int x = xRoi - 1;
+    int y = yRoi - 1;
+    //System.out.println("coordonnee du roi  x : " + xRoi + " y : " + yRoi );
+    //test de tout les mouvements possible pour le roi du joueur courant
+    while(y != yRoi + 1 ) {
+      //System.out.println("coordonnee teste x : " + x + " y : " + y);
+      //this.joueur = joueur;
+      this.plateau = plateaubase;
+      try {
+        if (this.deplacementPiece(xRoi, yRoi, x, y)) {
+          this.plateau = plateaubase;
+          return false; //il existe un mvt possible pour le roi du joueur courant
+        }
+        else if (x == xRoi + 1) {
+          x = xRoi -1;
+          y++;
+        }
+        else
+          x++;
+      }
+      catch (Exception e) {
+        if (x == xRoi + 1) {
+          x = xRoi -1;
+          y++;
+        }
+        else
+          x++;
+      }
+    }
+    return false;
+    }
+
+    System.out.println("Echec et Mat du joueur " + this.joueur + "!");
+    return true;//aucun mouvement possible pour le roi => joueur courant Mat
+
+  }//fin de la methode Mat
+
+public void chess(){
+  joueur = this.getJoueur();
+
+  while(!this.Mat()){
+    System.out.println("C'est au joueur " + joueur + " de jouer");
+
+    //entree des coordonnee de depart
+		System.out.println("Inserez les coordonnee de depart.");
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    int xDepart = convert(str.substring(0,1));
+    int yDepart = Integer.parseInt(str.substring(1,2));
+
+    //entree des coordonnee de destination
+    System.out.println("Inserez les coordonnee de depart.");
+     sc = new Scanner(System.in);
+     str = sc.nextLine();
+    int xDestination = convert(str.substring(0,1));
+    int yDestination = Integer.parseInt(str.substring(1,2));
+
+    //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
+    while(!this.deplacementPiece(xDepart, yDepart, xDestination, yDestination)){
+
+
+      //redemande les nouvelles coordonnee de depart
+      System.out.println("Inserez les coordonnee de depart.");
+       sc = new Scanner(System.in);
+       str = sc.nextLine();
+       xDepart = convert(str.substring(0,1));
+       yDepart = Integer.parseInt(str.substring(1,2));
+
+      //redemande les nouvelles coordonnee d arriver
+      System.out.println("Inserez les coordonnee d arrivee.");
+      sc = new Scanner(System.in);
+      str = sc.nextLine();
+      xDestination = convert(str.substring(0,1));
+      yDestination = Integer.parseInt(str.substring(1,2));
+    }
+    this.afficherplateau();
+  }//fin de la verification du Mat
+}
+
+  public int convert(String str){
+    if(str.equals("A") || str.equals("a")){
+			 return 0;
+		}
+		else if(str.equals("B") || str.equals("b")){
+			 return 1;
+		}
+		else if(str.equals("C") || str.equals("c")){
+			 return 2;
+		}
+		else if(str.equals("D") || str.equals("d")){
+			 return 3;
+		}
+		else if(str.equals("E") || str.equals("e")){
+			 return 4;
+		}
+		else if(str.equals("F") || str.equals("f")){
+			 return 5;
+		}
+		else if(str.equals("G") || str.equals("g")){
+			 return 6;
+		}
+		else if(str.equals("H") || str.equals("h")){
+			 return 7;
+		}
+    else
+      return 8;
+  }
 
 
   public void afficherplateau(){
-
+    System.out.println(historique);
     //affichage d'un plateau
+    String s = "  |   A   ||   B   ||   C   ||   D   ||   E   ||   F   ||   G   ||   H   |";
+    System.out.println(s);
     for (int i = 0 ; i < 8 ; i++ ){// les lignes du plateau
-
-        String s = ""; //creer la ligne du plateau
+        System.out.println("------------------------------------------------------------------------");
+        s = i + " "; //creer la ligne du plateau
 
         for ( int j = 0 ; j < 8 ; j++ ){ //les colonnes du plateau
           if(this.plateau[i * 8 + j] == null){//si la case du plateau ne contient pas de piece
