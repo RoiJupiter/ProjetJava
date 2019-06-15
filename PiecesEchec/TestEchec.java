@@ -3,19 +3,17 @@ import java.util.*;
 
 public class TestEchec{
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 
 
 	Partie partie = new Partie();
 	Piece[] plateau = partie.getPlateau();
-	partie.afficherplateau();
+
 	//System.out.print(plateau[7 + 8 * 7]);
 
-	partie.chess();
+	//partie.chess();
 
-
-	//MenuJoueur.dmrg();
+	MenuJoueur.run();
 	/*System.out.println(partie.getJoueur());
 
 	System.out.println(partie.deplacementPiece(4,3,3,3));

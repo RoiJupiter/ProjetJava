@@ -8,7 +8,6 @@ public class Partie{
 
 
   public Partie(){
-
     this.plateau = new Piece[64];
     this.initPlateau(); //initialisation de l echiquier l(8)
     this.joueur = "Blanc";
@@ -321,7 +320,7 @@ public class Partie{
 
 
         //MAJ de l'historique :s
-        historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + xDepart + "," + yDepart + ") au coordonnee (" + xDestination + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
+        historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + convert(xDepart) + "," + yDepart + ") au coordonnee (" + convert(xDestination) + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
 
         return true;//le mouvement a ete effectue
 
@@ -664,6 +663,38 @@ public void chess(){
     else
       return 8;
   }
+
+  public String convert(int x){
+    if(x == 0){
+			 return "A";
+		}
+    else if(x == 1){
+			 return "B";
+		}
+    else if(x == 2){
+			 return "C";
+		}
+    else if(x == 3){
+			 return "D";
+		}
+    else if(x == 4){
+			 return "E";
+		}
+    else if(x == 5){
+			 return "F";
+		}
+    else if(x == 6){
+			 return "G";
+		}
+    else if(x == 7){
+			 return "H";
+		}
+    else
+      return
+        "ERROR";
+  }
+
+
 
 
   public void afficherplateau(){
