@@ -595,45 +595,61 @@ public class Partie{
 
 public void chess(){
   joueur = this.getJoueur();
-
-  while(!this.Mat()){
+  String str = "";
+  while(!this.Mat() && !(str.equals("sauver"))){
     System.out.println("C'est au joueur " + joueur + " de jouer");
 
+    try {
     //entree des coordonnee de depart
 		System.out.println("Inserez les coordonnee de depart.");
     Scanner sc = new Scanner(System.in);
-    String str = sc.nextLine();
-    int xDepart = convert(str.substring(0,1));
-    int yDepart = Integer.parseInt(str.substring(1,2));
-
-    //entree des coordonnee de destination
-    System.out.println("Inserez les coordonnee de depart.");
-     sc = new Scanner(System.in);
-     str = sc.nextLine();
-    int xDestination = convert(str.substring(0,1));
-    int yDestination = Integer.parseInt(str.substring(1,2));
-
-    //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
-    while(!this.deplacementPiece(xDepart, yDepart, xDestination, yDestination)){
+    str = sc.nextLine();
+    if (str.equals("sauver")) {
+      this.sauver();
+    }
+    else{
+      int xDepart = convert(str.substring(0,1));
+      int yDepart = Integer.parseInt(str.substring(1,2));
 
 
-      //redemande les nouvelles coordonnee de depart
+      //entree des coordonnee de destination
       System.out.println("Inserez les coordonnee de depart.");
-       sc = new Scanner(System.in);
-       str = sc.nextLine();
-       xDepart = convert(str.substring(0,1));
-       yDepart = Integer.parseInt(str.substring(1,2));
-
-      //redemande les nouvelles coordonnee d arriver
-      System.out.println("Inserez les coordonnee d arrivee.");
       sc = new Scanner(System.in);
       str = sc.nextLine();
-      xDestination = convert(str.substring(0,1));
-      yDestination = Integer.parseInt(str.substring(1,2));
+      int xDestination = convert(str.substring(0,1));
+      int yDestination = Integer.parseInt(str.substring(1,2));
+
+      //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
+      while(!this.deplacementPiece(xDepart, yDepart, xDestination, yDestination)){
+
+
+        //redemande les nouvelles coordonnee de depart
+        System.out.println("Inserez les coordonnee de depart.");
+        sc = new Scanner(System.in);
+        str = sc.nextLine();
+        xDepart = convert(str.substring(0,1));
+        yDepart = Integer.parseInt(str.substring(1,2));
+
+        //redemande les nouvelles coordonnee d arriver
+        System.out.println("Inserez les coordonnee d arrivee.");
+        sc = new Scanner(System.in);
+        str = sc.nextLine();
+        xDestination = convert(str.substring(0,1));
+        yDestination = Integer.parseInt(str.substring(1,2));
+      }
+      this.afficherplateau();
     }
-    this.afficherplateau();
+    }
+    catch (Exception e) {
+      System.out.println("entre erronee");
+      this.afficherplateau();
+    }
   }//fin de la verification du Mat
 }
+
+  public void sauver(){
+    System.out.println("sauvegarde de la partie..");
+  }
 
   public int convert(String str){
     if(str.equals("A") || str.equals("a")){
