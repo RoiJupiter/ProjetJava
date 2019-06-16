@@ -1,5 +1,4 @@
-public class Fou extends Piece
-{
+public class Fou extends Piece {
   public Fou(String Couleur, int Mouv)
   {
     super(Couleur,Mouv);

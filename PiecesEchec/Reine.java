@@ -1,13 +1,10 @@
-public class Reine extends Piece
-{
-  public Reine(String Couleur,int Mouv)
-  {
+public class Reine extends Piece {
+  public Reine(String Couleur,int Mouv){
     super(Couleur,Mouv);
   }
 
   public int mouvement(int xDepart, int yDepart,
-                             int xDestination,  int yDestination)
-  {
+                             int xDestination,  int yDestination){
     if (xDestination - xDepart == yDestination - yDepart) {
       if (xDestination < xDepart - 1 ) {
         return 5; //mouvement en diagonale haut gauche + check chemin

@@ -1,4 +1,4 @@
-public class Cavalier extends Piece
+public class Cavalier extends Piece 
 {
   public Cavalier(String Couleur, int Mouv)
   {

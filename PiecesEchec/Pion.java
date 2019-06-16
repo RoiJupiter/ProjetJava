@@ -1,8 +1,6 @@
-public class Pion extends Piece
-{
+public class Pion extends Piece{
 
-  public Pion(String Couleur , int Mouv)
-  {
+  public Pion(String Couleur , int Mouv){
     super(Couleur,Mouv);
   }
 

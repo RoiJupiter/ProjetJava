@@ -1,6 +1,7 @@
 import java.util.Scanner;
+import java.io.*;
 
-public class Partie{
+public class Partie implements Serializable{
 
   private Piece[] plateau;
   private String joueur;
@@ -54,25 +55,15 @@ public class Partie{
     this.plateau[6] = new Cavalier("Noir",0);
     this.plateau[7] = new Tour("Noir",0);
 
-
     //Rangee de pions Noir
     for (int i = 8 ; i <= 15  ; i++ ){
         this.plateau[i] = new Pion("Noir",0);
       }
 
-    //this.plateau[4] = new Cavalier("Noir",0);
-    //this.plateau[16] = new Tour("Noir",0);
-    //this.plateau[28] = new Roi("Blanc",0);
-    //this.plateau[39] = new Tour("Noir",0);
-
     //Rangee des pions Blanc
     for (int i = 48 ; i <= 56  ; i++ ){
         this.plateau[i] = new Pion("Blanc",0);
       }
-
-    //this.plateau[2 + 8 * 6] = null;
-    //this.plateau[2 + 8 * 1] = null;
-
 
      //Les pieces du joueur Blanc
     this.plateau[56] = new Tour("Blanc",0);
@@ -84,9 +75,8 @@ public class Partie{
     this.plateau[62] = new Cavalier("Blanc",0);
     this.plateau[63] = new Tour("Blanc",0);
   }
+
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
-
-
 
     if( xDepart>7 || xDepart<0 && yDepart > 7 || yDepart < 0) {
         System.out.println("error : La case de depart n'existe pas.");
@@ -147,13 +137,7 @@ public class Partie{
     12 -> mouvement en ligne droite + check chemin
     */
 
-
-    /*System.out.println("piece depart : " + PieceDepart);
-    System.out.println("etat de piece arrivee : " + PieceArrive + "au coordonnee (" + xDestination + "," + yDestination + ").");*/
     int typemouv = PieceDepart.mouvement(xDepart, yDepart, xDestination, yDestination);
-
-
-
 
     if (typemouv == 0 ){//mouvement impossible
       //System.out.println("error : Votre piece ne peut pas faire ce mouvement.");
@@ -164,7 +148,6 @@ public class Partie{
         //System.out.println("error : Une piece alliee se trouve la case d'arrivee. Le contenu de la case : " + PieceArrive);
         return false;
     }
-
 
     else if (typemouv == 2 && PieceArrive != null){//mouvement en avant qui requiert qu'il n'y ai pas de piece sur la case de destination
       //System.out.println("error : La case d arrivee est occupee par la piece " + PieceArrive);
@@ -183,10 +166,11 @@ public class Partie{
 
     else if (typemouv == 5){//mouvement en diagonale haut gauche + check chemin
       int j = yDepart - 1;
+
       for (int i = xDepart - 1  ; i != xDestination ; i--) {
         if (this.plateau[i + j * 8] != null) {
-          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
-          return false;
+
+              return false;
         }
 
         j = j - 1;
@@ -198,7 +182,7 @@ public class Partie{
       int j = yDepart - 1;
       for (int i = xDepart + 1  ; i != xDestination ; i++) {
         if (this.plateau[i + j * 8] != null) {
-          //System.out.println("error : La piece " + this.plateau[i + j * 8] + "au coordonnee (" + i + "," + j  +") est sur le chemin.");
+
           return false;
         }
         j = j - 1;
@@ -239,7 +223,7 @@ public class Partie{
       for (int i = yDepart - 1  ; i > yDestination ; i--){
 
         if (this.plateau[xDepart + i * 8] != null){
-          //System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
+
           return false;
         }
       }
@@ -249,7 +233,7 @@ public class Partie{
       for (int i = yDepart + 1 ; i < yDestination  ; i++){
 
         if (this.plateau[xDepart + i * 8] != null){
-          //System.out.println("error : La piece " + this.plateau[xDepart + i * 8] + " est sur le chemin." );
+
           return false;
         }
       }
@@ -259,7 +243,7 @@ public class Partie{
     else if (typemouv == 11){//mouvement en ligne gauche + check chemin
       for (int i = xDepart - 1 ; i > xDestination   ; i--){
         if (this.plateau[i + yDestination * 8] != null){
-          //System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
+
           return false;
         }
       }
@@ -268,7 +252,7 @@ public class Partie{
     else if (typemouv == 12){//mouvement en ligne droite + check chemin
       for (int i = xDepart + 1 ; i < xDestination   ; i++){
         if (this.plateau[i + yDestination * 8] != null){
-          //System.out.println("error : La piece " + this.plateau[i + yDestination * 8] + " est sur le chemin." );
+
           return false;
         }
       }
@@ -281,14 +265,12 @@ public class Partie{
     }
 
     return true;
-
   }
 
   public boolean deplacementPiece(int xDepart, int yDepart,
                                    int xDestination, int yDestination){
 
 
-    //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
@@ -313,9 +295,9 @@ public class Partie{
         }
 
 
-        //System.out.println("Le joueur courant est : " + this.joueur);
+
         this.joueur = this.joueursuiv(); //au tour du joueur suivant  *mis en commentaire pour facilite les tests*.
-        //System.out.println("Le joueur courant est : " + this.joueur);
+
 
 
 
@@ -537,7 +519,6 @@ public class Partie{
   public boolean Mat(){//envoie true si le joueur courant est en Mat
     if (this.miseEnEchec()) {
 
-
     int xRoi = 0;
     int yRoi = 0;
     joueur = this.joueur;
@@ -558,10 +539,10 @@ public class Partie{
 
     int x = xRoi - 1;
     int y = yRoi - 1;
-    //System.out.println("coordonnee du roi  x : " + xRoi + " y : " + yRoi );
+
     //test de tout les mouvements possible pour le roi du joueur courant
     while(y != yRoi + 1 ) {
-      //System.out.println("coordonnee teste x : " + x + " y : " + y);
+
       //this.joueur = joueur;
       this.plateau = plateaubase;
       try {
@@ -596,16 +577,20 @@ public class Partie{
 public void chess(){
   joueur = this.getJoueur();
   String str = "";
-  while(!this.Mat() && !(str.equals("sauver"))){
+  while(!this.Mat() && !str.equals("sauver")){
     System.out.println("C'est au joueur " + joueur + " de jouer");
-
     try {
     //entree des coordonnee de depart
 		System.out.println("Inserez les coordonnee de depart.");
     Scanner sc = new Scanner(System.in);
     str = sc.nextLine();
+
     if (str.equals("sauver")) {
-      this.sauver();
+      sauver(this);
+    }
+    else if (str.equals("quitter")) {
+      //MenuJoueur.partie = this;
+      MenuJoueur.run();
     }
     else{
       int xDepart = convert(str.substring(0,1));
@@ -647,9 +632,6 @@ public void chess(){
   }//fin de la verification du Mat
 }
 
-  public void sauver(){
-    System.out.println("sauvegarde de la partie..");
-  }
 
   public int convert(String str){
     if(str.equals("A") || str.equals("a")){
@@ -710,8 +692,31 @@ public void chess(){
         "ERROR";
   }
 
+  public void sauver(Object partie){
+    System.out.println("sauvegarde de la partie ..");
+    try {
+      File save = new File("PartieSauvegardee.txt");
+      if (!save.exists())
+        save.createNewFile();
 
+      FileOutputStream fileOut = new FileOutputStream("PartieSauvegardee.txt");
+      ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+      objectOut.writeObject(partie);
+      fileOut.close();
+      objectOut.close();
 
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  /*public void charger(String chemin) throws IOException, ClassNotFoundException{
+     FileInputStream fis = new FileInputStream(chemin);
+     ObjectInputStream ois = new ObjectInputStream(fis);
+     this.plateau = (Piece[])ois.readObject();
+     this.joueur=(String)ois.readObject();
+     ois.close();
+   }*/
 
   public void afficherplateau(){
     System.out.println(historique);

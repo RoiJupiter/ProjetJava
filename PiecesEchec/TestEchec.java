@@ -12,7 +12,7 @@ public class TestEchec{
 	//System.out.print(plateau[7 + 8 * 7]);
 
 	//partie.chess();
-
+	//partie.sauver();
 	MenuJoueur.run();
 	/*System.out.println(partie.getJoueur());
 
