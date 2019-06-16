@@ -6,7 +6,7 @@ public class MenuJoueur{
 
   public String Couleur ;
 
-  public void run(){
+  public static void run(){
     Scanner sc = new Scanner(System.in);
 
     System.out.println("Voulez vous reprendre une ancienne partie ? (O/N)");
