@@ -9,7 +9,7 @@ public class Roi extends Piece{
   public int mouvement(int xPiece, int yPiece, int xDestination, int yDestination){
 
     if(this.Mouv == 0 && yPiece == yDestination && Math.abs(xDestination - xPiece) == 2 ){
-      System.out.println("ROQUE");
+
       return 13;//demande de roque
     }
 

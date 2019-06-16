@@ -41,7 +41,7 @@ public class Partie implements Serializable{
       return "Blanc";
     }
   }
-
+/*
   //Initialisateur de L'echiquier :
  public void initPlateau(){
 
@@ -74,12 +74,68 @@ public class Partie implements Serializable{
     this.plateau[61] = new Fou("Blanc",0);
     this.plateau[62] = new Cavalier("Blanc",0);
     this.plateau[63] = new Tour("Blanc",0);
+  }*/
+
+/*//TEST ECHEC
+  //Initialisateur de L'echiquier :
+  public void initPlateau(){
+    this.plateau[0] = new Roi("Blanc",0);
+    this.plateau[16] = new Tour("Blanc",0);
+    this.plateau[39] = new Tour("Blanc",0);
+    this.plateau[4] = new Cavalier("Blanc",0);
+    this.plateau[28] = new Roi("Noir",0);
+  }*/
+
+/*
+//TEST ECHEC et mat
+  //Initialisateur de L'echiquier :
+  public void initPlateau(){
+    this.plateau[0] = new Fou("Noir",0);
+    this.plateau[7] = new Fou("Noir",0);
+    this.plateau[16] = new Tour("Noir",0);
+    this.plateau[39] = new Tour("Noir",0);
+    this.plateau[4] = new Cavalier("Noir",0);
+    this.plateau[28] = new Roi("Blanc",0);
+    this.plateau[1] = new Roi("Noir",0);
+  }*/
+
+/*
+//TEST promotion
+  //Initialisateur de L'echiquier :
+
+  public void initPlateau(){
+  this.joueur = "Noir";
+    this.plateau[10] = new Pion("Blanc",0);
+    this.plateau[52] = new Pion("Noir",0);
+  }*/
+
+
+
+
+//Test roque
+
+  //Initialisateur de L'echiquier :
+ public void initPlateau(){
+
+
+    this.plateau[0] = new Tour("Noir",0);
+
+    this.plateau[3] = new Roi("Noir",0);
+
+    this.plateau[7] = new Tour("Noir",0);
+
+    this.plateau[56] = new Tour("Blanc",0);
+
+    this.plateau[60] = new Roi("Blanc",0);
+
+    this.plateau[63] = new Tour("Blanc",1);
+
   }
 
   public boolean mvtpossible(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
 
     if( xDepart>7 || xDepart<0 && yDepart > 7 || yDepart < 0) {
-        System.out.println("error : La case de depart n'existe pas.");
+        //System.out.println("error : La case de depart n'existe pas.");
 
         return false;
       }
@@ -92,7 +148,7 @@ public class Partie implements Serializable{
 
 
     if( xDestination>7 || xDestination<0 && yDestination > 7 || yDestination < 0) {
-        System.out.println("error : La case de d'arriver n'existe pas.");
+      //  System.out.println("error : La case de d'arriver n'existe pas.");
 
         return false;
       }
@@ -105,7 +161,7 @@ public class Partie implements Serializable{
     //System.out.println(PieceDepart);
 
     if(PieceDepart == null || !(PieceDepart.Couleur.equals(joueur)) ){
-      //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
+      this.afficherplateau();
       System.out.println("error: La case de depart est vide ou pion sur celle-ci ne vous appartient pas. Le contenu de la case : " + PieceDepart);
 
       return false;
@@ -217,8 +273,6 @@ public class Partie implements Serializable{
       return true;
     }
 
-
-
     else if (typemouv == 9){ //mouvement en ligne haut + check chemin
       for (int i = yDepart - 1  ; i > yDestination ; i--){
 
@@ -270,7 +324,6 @@ public class Partie implements Serializable{
   public boolean deplacementPiece(int xDepart, int yDepart,
                                    int xDestination, int yDestination){
 
-
     Piece PieceDepart = this.plateau[xDepart + 8 * yDepart];
     Piece PieceArrive = this.plateau[xDestination + 8 * yDestination];
 
@@ -294,18 +347,12 @@ public class Partie implements Serializable{
           promotion(xDestination,yDestination,this.joueur);
         }
 
-
-
         this.joueur = this.joueursuiv(); //au tour du joueur suivant  *mis en commentaire pour facilite les tests*.
-
-
-
 
         //MAJ de l'historique :s
         historique = historique + "- Mouvement de la piece " + PieceDepart + " de (" + convert(xDepart) + "," + yDepart + ") au coordonnee (" + convert(xDestination) + "," + yDestination+ "). Piece mangee : " + PieceArrive + " \n";
 
         return true;//le mouvement a ete effectue
-
 
       }//fin de la verification de la mise en echec du joueur courant
 
@@ -314,9 +361,7 @@ public class Partie implements Serializable{
         this.plateau[xDepart + 8 * yDepart] = PieceDepart;
         this.plateau[xDestination + 8 * yDestination] = PieceArrive;
 
-
         return false;//le mouvement ne s est pas effectue
-
       }
     }
 
@@ -341,7 +386,6 @@ public class Partie implements Serializable{
     else if (str == 4) {
       this.plateau[xPiece + 8 * yPiece] = new Reine(joueur,1);
     }
-
   }
 
   public boolean verifroque(int xDepart, int yDepart, int xDestination, int yDestination, String joueur){
@@ -378,7 +422,6 @@ public class Partie implements Serializable{
                   }
                   else
                     x++;//on test pour la case suivante
-
         }
         if (TourArrive != null && TourArrive.Mouv == 0) {
 
@@ -406,7 +449,6 @@ public class Partie implements Serializable{
           //on remet joueur modifier par deplacementPiece
           this.joueur = joueur;
 
-
           return true;
         }
       }//fin du roque vers la droite
@@ -429,16 +471,16 @@ public class Partie implements Serializable{
 
         }
         if (TourArrive != null && TourArrive.Mouv == 0) {
-
           //on deplace le roi et on verifie si a chaque mouvement miseEnEchec
-                //grace a miseEnEchec dans deplacementPiece
+                //grace a miseEnEche  c dans deplacementPiece
           Piece casetemp = this.plateau[xDestination2 + 8 * yDestination];
-
+          System.out.println(casetemp);
           while(casetemp != TourArrive){
+            System.out.println("xDepart " + xDepart + " xDestination2 " + xDestination2);
             if (!(deplacementPiece(xDepart, yDepart,
               xDestination2, yDestination))){
                 this.plateau = plateaubase; //on remet le plateau de base si le roque
-                System.out.println("Votre roque vous met en echec ");//est impossible
+                System.out.println("Votre roque vous met en echec gauche");//est impossible
                 return false;
             }
             xDepart = xDepart - 1 ;
@@ -447,7 +489,6 @@ public class Partie implements Serializable{
             }
           }
 
-
           //on deplace a la TourArrive
           this.plateau[xDepart - 1  + 8 * yDepart] = this.plateau[0 + 8 * yDepart];
           this.plateau[0 + 8 * yDepart] = null;
@@ -455,13 +496,11 @@ public class Partie implements Serializable{
           //on remet joueur modifier par deplacementPiece
           this.joueur = joueur;
 
-
           return true;
         }
 
       return false ;
   }//fin de verifroque
-
 
   public boolean miseEnEchec(){//envoie true si le Roi du joueur n est
     String couleuradv;          //pas en echec sinon envoie false
@@ -498,30 +537,25 @@ public class Partie implements Serializable{
         if(this.plateau[i * 8 + j] != null && this.plateau[i * 8 + j].Couleur == joueur && this.mvtpossible(j,i,xRoi,yRoi,joueur)){
           System.out.println("Votre Roi est en echec !");
           this.joueur = courant;
+          System.out.println(this.getJoueur());
           return false;
         }
       }
-
     }
 
-    if(this.joueur == "Blanc"){
-      couleuradv = "Noir";
-
-    }
-    else
-      couleuradv = "Blanc";
-
-    this.joueur = couleuradv;
+    this.joueur = courant;
 
     return true;
   }//fin de miseEnEchec
 
   public boolean Mat(){//envoie true si le joueur courant est en Mat
+
     if (this.miseEnEchec()) {
 
     int xRoi = 0;
     int yRoi = 0;
-    joueur = this.joueur;
+    String courant = this.joueur;
+
     //on recherche les coordonnee du roi
     for (int i = 0; i < 8 ; i++) {
       for (int j = 0 ; j < 8; j++) {
@@ -542,12 +576,14 @@ public class Partie implements Serializable{
 
     //test de tout les mouvements possible pour le roi du joueur courant
     while(y != yRoi + 1 ) {
-
-      //this.joueur = joueur;
       this.plateau = plateaubase;
+
       try {
-        if (this.deplacementPiece(xRoi, yRoi, x, y)) {
+        if (this.mvtpossible(xRoi, yRoi, x, y,courant)) {
+
           this.plateau = plateaubase;
+          this.joueur = courant;
+
           return false; //il existe un mvt possible pour le roi du joueur courant
         }
         else if (x == xRoi + 1) {
@@ -566,11 +602,12 @@ public class Partie implements Serializable{
           x++;
       }
     }
+    System.out.println("Echec et Mat du joueur " + this.joueur + "!");
     return false;
     }
 
-    System.out.println("Echec et Mat du joueur " + this.joueur + "!");
-    return true;//aucun mouvement possible pour le roi => joueur courant Mat
+
+    return false;//aucun mouvement possible pour le roi => joueur courant Mat
 
   }//fin de la methode Mat
 
@@ -607,7 +644,8 @@ public void chess(){
       //System.out.println("Les coordonnee entree " + xDepart  + " " + yDepart);
       while(!this.deplacementPiece(xDepart, yDepart, xDestination, yDestination)){
 
-
+        this.afficherplateau();
+        System.out.println("Au tour du joueur : " + this.getJoueur());
         //redemande les nouvelles coordonnee de depart
         System.out.println("Inserez les coordonnee de depart.");
         sc = new Scanner(System.in);
